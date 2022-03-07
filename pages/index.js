@@ -1,10 +1,11 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import {Client} from '@notionhq/client'
+import ProjectList from '../components/ProjectList'
 
-export default function Home() {
+
+export default function Home({projects}) {
   return (
     <>
+      <ProjectList projects={projects} />
     </>
   )
 }
