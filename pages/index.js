@@ -14,23 +14,23 @@ export default function Home({projects}) {
 export async function getStaticProps() {
     
   const notion = new Client({auth: process.env.NOTION_API_KEY});
-  const response = await notion.search({
+  /*const response = await notion.search({
       filter: {
           property: "object",
           value: "database"
       }
-  });
+  });*/
   
-  const ProjectID = response.results[0].id;
-  const PeopleID = response.results[1].id;
-  const TimereportID = response.results[2].id;
+  const ProjectID = process.env.NOTION_DATABASE_ID_PROJECTS;
+  /*const PeopleID = response.results[1].id;
+  const TimereportID = response.results[2].id;*/
 
-  const People = await notion.databases.query({
+  /*const People = await notion.databases.query({
       database_id: PeopleID,
   });
   const Timereports = await notion.databases.query({
       database_id: TimereportID,
-  });
+  });*/
   const ActiveProjects = await notion.databases.query({
       database_id: ProjectID,
       filter:{
