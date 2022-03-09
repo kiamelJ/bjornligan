@@ -1,5 +1,6 @@
 import { Client } from '@notionhq/client'
 import ProjectList from '../components/ProjectList'
+import styles from '../styles/Home.module.css'
 
 
 export default function Home({ projects }) {
