@@ -1,8 +1,8 @@
-import {Client} from '@notionhq/client'
+import { Client } from '@notionhq/client'
 import ProjectList from '../components/ProjectList'
 
 
-export default function Home({projects}) {
+export default function Home({ projects }) {
   return (
     <>
       <ProjectList projects={projects} />
@@ -11,16 +11,16 @@ export default function Home({projects}) {
 }
 
 
-export async function getStaticProps() {
-    
-  const notion = new Client({auth: process.env.NOTION_API_KEY});
+export async function getServerSideProps() {
+
+  const notion = new Client({ auth: process.env.NOTION_API_KEY });
   /*const response = await notion.search({
       filter: {
           property: "object",
           value: "database"
       }
   });*/
-  
+
   const ProjectID = process.env.NOTION_DATABASE_ID_PROJECTS;
   /*const PeopleID = response.results[1].id;
   const TimereportID = response.results[2].id;*/
@@ -32,19 +32,19 @@ export async function getStaticProps() {
       database_id: TimereportID,
   });*/
   const ActiveProjects = await notion.databases.query({
-      database_id: ProjectID,
-      filter:{
-        property: "Status",
-        select: {
-          equals: "Active"
-        }
-      } 
+    database_id: ProjectID,
+    filter: {
+      property: "Status",
+      select: {
+        equals: "Active"
+      }
+    }
   });
 
   return {
-      props: {
-          projects: ActiveProjects.results 
-      }
+    props: {
+      projects: ActiveProjects.results
+    }
   }
 }
 
