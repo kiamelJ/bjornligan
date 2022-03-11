@@ -1,9 +1,11 @@
 import React from "react";
-// import styles from "../styles/Home.module.css";
-
-class Home extends React.Component {
+/** props person-ID och project-ID
+ * Namn?
+ * */
+class FormTimeReport extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       note: "",
       date: "",
@@ -31,7 +33,6 @@ class Home extends React.Component {
     event.preventDefault();
     console.log(this.state);
 
-    //Hmm: component(?) addReport({this.state})
     const response = await fetch("../api/timereport", {
       method: "POST",
       headers: {
@@ -39,13 +40,12 @@ class Home extends React.Component {
       },
       body: JSON.stringify(this.state),
     });
+
+    // Hmm: felhantering
+    // if(!response.ok){ }
     console.log("INDEX", response);
 
-    // if (!response.ok) {
-    //   throw new Error(`Error: ${response.status}`);
-    // }
-
-    //Hmm: clear the form out
+    // Hmm: clear the form out
     // setValue(initialState);
   }
 
@@ -85,7 +85,7 @@ class Home extends React.Component {
           required
         />
 
-        {/* select */}
+        {/* TODO: bort sen */}
         <label htmlFor='project'>Project</label>
         <input
           name='project'
@@ -96,7 +96,7 @@ class Home extends React.Component {
           required
         />
 
-        {/* select */}
+        {/* TODO: bort sen */}
         <label htmlFor='person'>Person</label>
         <input
           name='person'
@@ -111,4 +111,4 @@ class Home extends React.Component {
     );
   }
 }
-export default Home;
+export default FormTimeReport;

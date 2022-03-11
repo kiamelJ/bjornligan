@@ -1,10 +1,9 @@
-/* eslint-disable import/no-anonymous-default-export */
 const { Client } = require("@notionhq/client");
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseId = `${process.env.NOTION_DATABASE_ID_TIMEREPORTS}`;
 
-export default async (request, res) => {
+export default async function handler(request, res) {
   const { method } = request;
   console.log("request.body: ", request.body);
 
@@ -17,7 +16,7 @@ export default async (request, res) => {
     res.status(200).json({ response });
   }
 
-  // POST (request from page/timereport/index.js when submit form)
+  // POST (create new page in timereport database)
   if (method === "POST") {
     const response = await notion.pages.create({
       parent: {
@@ -61,4 +60,4 @@ export default async (request, res) => {
     console.log("response, timereport added: ", response);
     res.status(200).json();
   }
-};
+}
