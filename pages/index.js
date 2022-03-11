@@ -1,51 +1,54 @@
 import { Client } from '@notionhq/client'
 import ProjectList from '../components/ProjectList'
+import React from 'react'
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
+import { setCookies } from 'cookies-next';
 
 
-export default function Home({ projects }) {
-  return (
-    <>
-      <ProjectList projects={projects} />
-    </>
-  )
-}
 
+function Login()  {
+  const [data, setData] = useState(null)
+  const [isLoading, setLoading] = useState(false)
+  
 
-export async function getServerSideProps() {
+  useEffect(() => {
+    setLoading(true)
+    fetch('../api/people')
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+        setLoading(false)
+      })
+  }, [])
 
-  const notion = new Client({ auth: process.env.NOTION_API_KEY });
-  /*const response = await notion.search({
-      filter: {
-          property: "object",
-          value: "database"
+  function choosePerson(e){
+    console.log(e);
+
+    for(let i = 0; i < data.length; i++)
+    {
+      if(data[i].name === e.currentTarget.value)
+      {
+        setCookies(e.currentTarget.value, data[i].id);
       }
-  });*/
-
-  const ProjectID = process.env.NOTION_DATABASE_ID_PROJECTS;
-  /*const PeopleID = response.results[1].id;
-  const TimereportID = response.results[2].id;*/
-
-  /*const People = await notion.databases.query({
-      database_id: PeopleID,
-  });
-  const Timereports = await notion.databases.query({
-      database_id: TimereportID,
-  });*/
-  const ActiveProjects = await notion.databases.query({
-    database_id: ProjectID,
-    filter: {
-      property: "Status",
-      select: {
-        equals: "Active"
-      }
-    }
-  });
-
-  return {
-    props: {
-      projects: ActiveProjects.results
     }
   }
-}
 
+  if (isLoading) return <p>Loading...</p>
+  if (!data) return <p>No profile data</p>
 
+  return (
+    <select
+      onChange={(e) => choosePerson(e)}
+    >
+      <option value="none" selected disabled hidden>Select user</option>
+      {data.map(({ name, id }) => (
+        <option key={id} value={name}>
+          {name}
+        </option>
+      ))}
+    </select>
+  )
+};
+
+export default Login;
