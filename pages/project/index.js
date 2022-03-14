@@ -2,6 +2,8 @@ import react from "react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import FormTimeReport from "../timereport";
+import { setCookies } from "cookies-next";
+import router from "next/router";
 
 const ProjectList = ({ projects }) => {
   const [data, setData] = useState(null);
@@ -21,6 +23,14 @@ const ProjectList = ({ projects }) => {
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No profile data</p>;
 
+  function makeTimereport(projectId){
+    
+    console.log(projectId)
+    setCookies("Project.Id",projectId)
+    router.push("../timereport");
+  }
+  
+
   return (
     <div className='container'>
       <main className='main'>
@@ -28,16 +38,18 @@ const ProjectList = ({ projects }) => {
         <p className='description'>Information</p>
         <div className='grid'>
           {data.results.map((project) => (
-            <li key={project.id} className='card'>
+            <li key={project.id} id={project.id} className='card'>
               <h2>
                 {project.properties.Projectname.title[0].plain_text} &rarr;
               </h2>
               <p>projektinfo</p>
-              <Link href='../timereport'>
+              {/* <button onClick={makeTimereport(project.id)}>Ny tidrapport</button> */}
+              <button type="submit" onClick={() => {makeTimereport(project.id)}}>Ny tidrapport</button>
+              {/* <Link href='../timereport'>
                 <a>
-                  <button>Ny tidrapport</button>
+                  <button onClick={makeTimereport(project.id)}>Ny tidrapport</button>
                 </a>
-              </Link>
+              </Link> */}
             </li>
           ))}
         </div>
@@ -45,5 +57,10 @@ const ProjectList = ({ projects }) => {
     </div>
   );
 };
+// const makeTimereport=function(projectId){
+//   console.log(projectId)
+//   setCookies("Project.Id",projectId)
+
+// }
 
 export default ProjectList;

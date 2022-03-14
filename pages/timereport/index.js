@@ -1,4 +1,6 @@
 import React from "react";
+import { getCookie } from "cookies-next";
+
 /** props person-ID och project-ID
  * Namn?
  * */
@@ -10,8 +12,8 @@ class FormTimeReport extends React.Component {
       note: "",
       date: "",
       hours: "",
-      person: "",
-      project: "",
+      person: getCookie("Penny Tool"),
+      project: getCookie("Project.Id"),
     };
 
     this.handleChange = this.handleChange.bind(this);
