@@ -12,7 +12,7 @@ class FormTimeReport extends React.Component {
       note: "",
       date: "",
       hours: "",
-      person: getCookie("Penny Tool"),
+      person: getCookie("Björnligan"),
       project: getCookie("Project.Id"),
     };
 

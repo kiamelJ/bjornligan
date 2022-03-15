@@ -29,16 +29,30 @@ export default async (req, res) => {
         }
     }
 
+    //console.log(jsonUsers);
     res.send(jsonUsers);
     }
 
     if (method === "POST") {
 
         const userID = req.body;
+        
+        console.log(req.body);
+
+        const userCookies = await notion.databases.query({
+            database_id: peopleID,
+            filter: {
+                property: "Cookie",
+                number: { equals: parseInt(userID), }
+            }
+        })
+
+        console.log(userCookies);
 
         const userData = await notion.pages.retrieve({
-          page_id: userID,
+          page_id: userCookies.results[0].id,
         });
+
 
         let userProjectsId = [];
 

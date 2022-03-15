@@ -9,7 +9,6 @@ const ProjectList = ({ projects }) => {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
-  
 
   useEffect(() => {
     setLoading(true);
@@ -18,7 +17,7 @@ const ProjectList = ({ projects }) => {
       headers: {
         "Content-Type": "plain/text",
       },
-      body: getCookie("Björnligan"),
+      body: getCookie("User"),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -37,7 +36,6 @@ const ProjectList = ({ projects }) => {
     setCookies("Project.Id",projectId)
     router.push("../timereport");
   }
-  
 
   return (
     <div className='container'>
