@@ -2,21 +2,29 @@ import react from "react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import FormTimeReport from "../timereport";
-import { setCookies } from "cookies-next";
+import { setCookies, getCookie } from "cookies-next";
 import router from "next/router";
 
 const ProjectList = ({ projects }) => {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
+  
+
   useEffect(() => {
     setLoading(true);
-    fetch("../api/project")
+    fetch("../api/people", {
+      method: "POST",
+      headers: {
+        "Content-Type": "plain/text",
+      },
+      body: getCookie("Björnligan"),
+    })
       .then((res) => res.json())
       .then((data) => {
         setData(data);
         setLoading(false);
-        console.log(data);
+        //console.log(data);
       });
   }, []);
 
@@ -37,7 +45,7 @@ const ProjectList = ({ projects }) => {
         <h1 className='title'>Aktiva Projekt</h1>
         <p className='description'>Information</p>
         <div className='grid'>
-          {data.results.map((project) => (
+          {data.map((project) => (
             <li key={project.id} id={project.id} className='card'>
               <h2>
                 {project.properties.Projectname.title[0].plain_text} &rarr;
