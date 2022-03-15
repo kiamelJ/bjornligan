@@ -12,21 +12,23 @@ export default async (req, res) => {
     if (method === "POST") {
         let userdata = req.body;
 
+        //Hämta hem användarens info
         const user = await notion.pages.retrieve({
             page_id: userdata.id,
         });
 
-        //console.log(user);
-
+        //Skapa ett kakobjekt som vi senare skickar tillbaka till användaren.
+        //Innehåller data: unikt tal, dvs varje kaka som skapas blir unik, samt
+        //set: om lösenordet var rätt eller inte.
         let cookiedata = {
             data: "",
             set: false,
         }
 
+        //Boolean för att hålla koll på om rätt lösenord användes.
         let found = false;
-
-        //console.log(user);
         
+        //Testa det angivna lösenordet mot det som ligger i databasen.
         if(userdata.pw === user.properties.Password.rich_text[0].text.content)
         {
             cookiedata.data = Date.now();
@@ -34,7 +36,8 @@ export default async (req, res) => {
             found = true;
         }
     
-
+        //Är lösenordet rätt, sätt värdet på kakan i notions databas. Värdet i Notion överensstämmer med kakan användaren får ut.
+        //TODO: Värdet på kakan lagras i minnet på servern för att slippa göra anrop mot notion.
         if(found)
         {
             console.log("rätt lösenord");
@@ -46,12 +49,11 @@ export default async (req, res) => {
                     }
                 }
             });
-            cookiedata.set = true;
             
-            //console.log(response);
 
         }
 
+        //Är det fel lösenord, sätt kakans bool till false.
         if(!found)
         {
             console.log("fel lösenord");
@@ -59,6 +61,7 @@ export default async (req, res) => {
             cookiedata.set = false;
         }
 
+        //Lämna tillbaka kakan till användaren.
         res.send(JSON.stringify(cookiedata));
     }
 

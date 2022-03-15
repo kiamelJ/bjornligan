@@ -12,8 +12,8 @@ export default async (req, res) => {
     if (method === "POST"){
         let userdata = req.body;
 
-        //console.log(userdata.id);
-
+        //Uppdatera lösenordet med det nya angivna lösenordet.
+        //TODO: Användaren måste ange sitt gamla lösenord för att kunna ändra lösenord. 
         const response = await notion.pages.update({
             page_id: userdata.id,
             properties: {
@@ -25,8 +25,7 @@ export default async (req, res) => {
             }
         });
 
-        //console.log(response);
-
+        //Flagga att det gick bra.
         res.status(200);
 
     }
