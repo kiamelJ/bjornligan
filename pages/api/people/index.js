@@ -10,27 +10,20 @@ export default async (req, res) => {
     // GET (default request) to retrieve data
     // visit http://localhost:3000/api/timereport to view =)
     if (method === "GET") {
-      const response = await notion.databases.query({
-        database_id: peopleID,
-    });
 
-    //console.log(response);
+        const response = await notion.databases.query({
+            database_id: peopleID,
+        });
 
-    let jsonUsers = [{
-        name: "",
-        id: ""
-    }];
-    
-    for(let i = 0; i < response.results.length; i++)
-    {
-        jsonUsers[i] = {
-            name: response.results[i].properties.Name.title[0].plain_text,
-            id: response.results[i].id
-        }
-    }
-
-    //console.log(jsonUsers);
-    res.send(jsonUsers);
+        const people = response.results.map((person) => {
+            return {
+                id: person.id,
+                name: person.properties.Name.title[0].plain_text,
+                image: person.properties.Image.files[0].file.url,
+            }
+        })
+        
+        res.status(200).json(people)
     }
 
     if (method === "POST") {

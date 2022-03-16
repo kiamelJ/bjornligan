@@ -1,5 +1,6 @@
 import React from "react";
 import { getCookie } from "cookies-next";
+import styles from '../../styles/Temp.module.css'
 
 /** props person-ID och project-ID
  * Namn?
@@ -53,41 +54,44 @@ class FormTimeReport extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor='note'>Note</label>
-        <input
-          name='note'
-          type='text'
-          placeholder='Enter comment...'
-          value={this.state.note}
-          onChange={this.handleChange}
-          required
-        />
+      <div className={styles.container}>
+        <form className={styles.form} onSubmit={this.handleSubmit}>
+          <div className={styles.inputs}>
+            <label htmlFor='note'>Note</label>
+            <input
+              name='note'
+              type='text'
+              placeholder='Enter comment...'
+              value={this.state.note}
+              onChange={this.handleChange}
+              required
+            />
+          </div>
 
-        <label htmlFor='date'>Date</label>
-        <input
-          name='date'
-          type='text'
-          pattern='([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))'
-          title='(YYYY-MM-DD)'
-          placeholder='YYYY-MM-DD'
-          value={this.state.date}
-          onChange={this.handleChange}
-          required
-        />
+          <label htmlFor='date'>Date</label>
+          <input
+            name='date'
+            type='text'
+            pattern='([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))'
+            title='(YYYY-MM-DD)'
+            placeholder='YYYY-MM-DD'
+            value={this.state.date}
+            onChange={this.handleChange}
+            required
+          />
 
-        <label htmlFor='hours'>Hours</label>
-        <input
-          name='hours'
-          type='number'
-          placeholder='Enter hours...'
-          pattern='^[0-9]*$'
-          value={this.state.hours}
-          onChange={this.handleChange}
-          required
-        />
-
-        {/* TODO: bort sen */}
+          <label htmlFor='hours'>Hours</label>
+          <input
+            name='hours'
+            type='number'
+            placeholder='Enter hours...'
+            pattern='^[0-9]*$'
+            value={this.state.hours}
+            onChange={this.handleChange}
+            required
+          />
+          {/* 
+        TODO: bort sen
         <label htmlFor='project'>Project</label>
         <input
           name='project'
@@ -97,8 +101,7 @@ class FormTimeReport extends React.Component {
           onChange={this.handleChange}
           required
         />
-
-        {/* TODO: bort sen */}
+        TODO: bort sen
         <label htmlFor='person'>Person</label>
         <input
           name='person'
@@ -107,9 +110,10 @@ class FormTimeReport extends React.Component {
           value={this.state.person}
           onChange={this.handleChange}
           required
-        />
-        <button type='submit'>Submit</button>
-      </form>
+        /> */}
+          <button type='submit'>Submit</button>
+        </form>
+      </div>
     );
   }
 }
