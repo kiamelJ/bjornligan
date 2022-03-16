@@ -29,6 +29,9 @@ function Login() {
       }
     }
 
+
+
+
     //Används för att automatiskt gå vidare till nästa sida när en person är vald.
     Router.push("/project");
   }
@@ -40,8 +43,8 @@ function Login() {
     <>
       <div className='container'>
         <main className='main'>
-          <h1 className='title'>Login</h1>
-          <p className='description'>Välj användare</p>
+          <h1 className='title'>Välj användare för att logga in </h1>
+          <p className='description'></p>
           <div className='grid'>
             {data.map(({ name, id, image }) => (
               <div onClick={(e) => choosePerson(e, name)}>
