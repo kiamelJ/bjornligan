@@ -1,6 +1,6 @@
 ## Installera modules nedan
 
-npm install next react react-dom @notionhq/client cookies-next
+npm install next react react-dom @notionhq/client cookies-next crypto-js 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
