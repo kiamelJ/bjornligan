@@ -1,16 +1,12 @@
-import { Client } from '@notionhq/client'
-import ProjectList from '../components/ProjectList'
 import React from 'react'
 import Router from 'next/router';
 import { useState, useEffect } from 'react';
 import { setCookies, removeCookies } from 'cookies-next';
-import Link from 'next/link'
 
-
-function Login()  {
+function Login() {
   const [data, setData] = useState(null)
   const [isLoading, setLoading] = useState(false)
-  
+
   removeCookies("Björnligan");
   console.log(1);
 
@@ -24,13 +20,11 @@ function Login()  {
       })
   }, [])
 
-  function choosePerson(e){
+  function choosePerson(e, name) {
     console.log(e);
 
-    for(let i = 0; i < data.length; i++)
-    {
-      if(data[i].name === e.currentTarget.value)
-      {
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].name === name) {
         setCookies("Björnligan", data[i].id);
       }
     }
@@ -42,32 +36,28 @@ function Login()  {
   if (isLoading) return <p>Loading...</p>
   if (!data) return <p>No profile data</p>
 
-  
   return (
     <>
-    <select
-      onChange={(e) => choosePerson(e)}
-    >
-      <option value="none" selected disabled hidden>Select user</option>
-      {data.map(({ name, id }) => (
-        <option key={id} value={name}>
-          {name}
-        </option>
-      ))}
-    </select>
-    {/* 
-      Om en knapp ska användas för att ta sig vidare.
-      <Link href="/project">
-      <button type="button">Välj användare</button></Link>
-    */}
+      <div className='container'>
+        <main className='main'>
+          <h1 className='title'>Login</h1>
+          <p className='description'>Välj användare</p>
+          <div className='grid'>
+            {data.map(({ name, id, image }) => (
+              <div onClick={(e) => choosePerson(e, name)}>
+                <div key={id} value={name} className='card'>
+                  <img src={image} width="100" alt="Profilbild" className="center"></img>
+                  <h2>
+                    {name}
+                  </h2>
+                </div>
+              </div>
+            ))}
+          </div>
+        </main >
+      </div >
     </>
   )
-
-    
-  
-  
-  
-  
 };
 
 export default Login;
