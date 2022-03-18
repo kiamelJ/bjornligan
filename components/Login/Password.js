@@ -65,6 +65,7 @@ class Password extends React.Component {
         {
         //Sätt kakan till det unika talet som servern skickar.
         setCookies("User", returnedData.data);
+        setCookies("Username", returnedData.name)
         //Gå vidare till projektsidan.
         Router.push("./projects")
         }

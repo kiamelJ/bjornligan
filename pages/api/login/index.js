@@ -22,6 +22,7 @@ export default async (req, res) => {
         //set: om lösenordet var rätt eller inte.
         let cookiedata = {
             data: "",
+            name: "",
             set: false,
         }
 
@@ -33,6 +34,7 @@ export default async (req, res) => {
         {
             cookiedata.data = Date.now();
             cookiedata.set = true;
+            cookiedata.name = user.properties.Name.title[0].plain_text;
             found = true;
         }
     

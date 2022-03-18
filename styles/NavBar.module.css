@@ -4,15 +4,27 @@
     background: #000;
     color: #fff;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
   }
-  
+
+  .nav leftSideBlock{
+    display: flex;
+    align-items: left;
+    justify-content: left;
+  }
+
+  .nav rightSideBlock{
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    width: 100%;
+  }
+
+
   .nav ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    list-style: none;
+    list-style-type: none;
   }
   
   .nav ul li a {

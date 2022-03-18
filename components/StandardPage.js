@@ -4,8 +4,6 @@ import ReportPage from './Reports/ReportPage'
 import UserPage from './UserPage/UserPage'
 
 
-
-
 const StandardPage = ({ type }) => {
     if(type == "Project")
     {
@@ -44,9 +42,4 @@ const StandardPage = ({ type }) => {
     
   };
   
-  export default StandardPage;
-
-
-
-
-  
+  export default StandardPage;  
