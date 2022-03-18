@@ -1,7 +1,6 @@
 import React from 'react'
 
-
-import LoginPage from '../components/LoginPage'
+import Page from '../../components/StandardPage'
 
 
 
@@ -10,7 +9,7 @@ class LoginPW extends React.Component {
   render() {
     return (
       <>
-        <LoginPage />
+        <Page type={"Project"} />
       </>
     )
   }

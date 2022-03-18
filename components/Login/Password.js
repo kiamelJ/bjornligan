@@ -1,4 +1,5 @@
 import React from 'react'
+import Router from 'next/router'
 import sha256 from 'crypto-js/sha256';
 import hmacSHA512 from 'crypto-js/hmac-sha512';
 import Base64 from 'crypto-js/enc-base64';
@@ -65,7 +66,7 @@ class Password extends React.Component {
         //Sätt kakan till det unika talet som servern skickar.
         setCookies("User", returnedData.data);
         //Gå vidare till projektsidan.
-        //Router.push("/project");
+        Router.push("./projects")
         }
     }
 

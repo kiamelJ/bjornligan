@@ -1,7 +1,7 @@
 import react from "react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import FormTimeReport from "../timereport";
+import FormTimeReport from "../Reports/ReportPage";
 import { setCookies, getCookie } from "cookies-next";
 import router from "next/router";
 
@@ -34,7 +34,7 @@ const ProjectList = ({ projects }) => {
     
     console.log(projectId)
     setCookies("Project.Id",projectId)
-    router.push("../timereport");
+    router.push("../reports");
   }
 
   return (
