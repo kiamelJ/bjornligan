@@ -23,6 +23,7 @@ export default async (req, res) => {
         let cookiedata = {
             data: "",
             name: "",
+            id: "",
             set: false,
         }
 
@@ -35,6 +36,7 @@ export default async (req, res) => {
             cookiedata.data = Date.now();
             cookiedata.set = true;
             cookiedata.name = user.properties.Name.title[0].plain_text;
+            cookiedata.id = user.id;
             found = true;
         }
     

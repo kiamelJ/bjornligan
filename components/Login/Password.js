@@ -1,8 +1,6 @@
 import React from 'react'
 import Router from 'next/router'
-import sha256 from 'crypto-js/sha256';
-import hmacSHA512 from 'crypto-js/hmac-sha512';
-import Base64 from 'crypto-js/enc-base64';
+import Hash from './Hashing'
 import { setCookies, removeCookies } from 'cookies-next';
 
 
@@ -17,21 +15,13 @@ class Password extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-  //TODO: bättre hashning
-  hashPassword(password) {
-    const hashDigest = sha256(password);
-    const hmacDigest = Base64.stringify(hmacSHA512(hashDigest, "test"));
-    console.log(hmacDigest);
-    return hmacDigest;
-  }
-
     //Hantering av lösenord.
   async handleSubmit(event) {
     // Stop the form from submitting and refreshing the page.
         event.preventDefault();
 
         //Hasha lösenordet.
-        let hashedPassword = this.hashPassword(this.state.password);
+        let hashedPassword = Hash(this.state.password);
         
         let loginData = {
         pw: hashedPassword,
@@ -66,6 +56,7 @@ class Password extends React.Component {
         //Sätt kakan till det unika talet som servern skickar.
         setCookies("User", returnedData.data);
         setCookies("Username", returnedData.name)
+        setCookies("UserID", returnedData.id)
         //Gå vidare till projektsidan.
         Router.push("./projects")
         }
@@ -79,7 +70,7 @@ class Password extends React.Component {
         return (
         <form onSubmit={this.handleSubmit}>
         <input
-          type='text'
+          type='password'
           placeholder='Enter password...'
           onChange={this.handleChange}
           

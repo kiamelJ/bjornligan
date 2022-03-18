@@ -6,13 +6,13 @@
     display: flex;
   }
 
-  .nav leftSideBlock{
+  .nav LeftSideBlock{
     display: flex;
     align-items: left;
     justify-content: left;
   }
 
-  .nav rightSideBlock{
+  .nav RightSideBlock{
     display: flex;
     align-items: right;
     justify-content: right;

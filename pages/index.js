@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-import LoginPage from '../components/LoginPage'
+import LoginPage from '../components/AccessPage'
 
 
 
@@ -10,7 +10,7 @@ class LoginPW extends React.Component {
   render() {
     return (
       <>
-        <LoginPage />
+        <LoginPage type={"Login"} />
       </>
     )
   }

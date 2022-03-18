@@ -32,31 +32,25 @@ const ProjectList = ({ projects }) => {
   if (!data) return <p>No profile data</p>;
 
   function makeTimereport(projectId){
-    
-    console.log(projectId)
-    setCookies("Project.Id",projectId)
-    router.push("../reports");
+    //console.log(projectId)
+    setCookies("projectID",projectId)
+    router.push("../reports/createreport");
   }
+  //console.log(data);
 
   return (
     <div className='container'>
       <main className='main'>
         <h1 className='title'>Aktiva Projekt</h1>
-        <p className='description'>Information</p>
+        <p className='description'></p>
         <div className='grid'>
           {data.map((project) => (
             <li key={project.id} id={project.id} className='card'>
               <h2>
-                {project.properties.Projectname.title[0].plain_text} &rarr;
+                {project.properties.Projectname.title[0].plain_text}
               </h2>
-              <p>projektinfo</p>
-              {/* <button onClick={makeTimereport(project.id)}>Ny tidrapport</button> */}
-              <button type="submit" onClick={() => {makeTimereport(project.id)}}>Ny tidrapport</button>
-              {/* <Link href='../timereport'>
-                <a>
-                  <button onClick={makeTimereport(project.id)}>Ny tidrapport</button>
-                </a>
-              </Link> */}
+              <p>{project.properties.Status.select.name}</p>
+              <button type="submit" onClick={() => { makeTimereport(project.id) }}>Ny tidrapport</button>
             </li>
           ))}
         </div>
@@ -64,10 +58,6 @@ const ProjectList = ({ projects }) => {
     </div>
   );
 };
-// const makeTimereport=function(projectId){
-//   console.log(projectId)
-//   setCookies("Project.Id",projectId)
 
-// }
 
 export default ProjectList;

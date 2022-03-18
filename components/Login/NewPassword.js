@@ -1,9 +1,5 @@
 import React from 'react'
-import sha256 from 'crypto-js/sha256';
-import hmacSHA512 from 'crypto-js/hmac-sha512';
-import Base64 from 'crypto-js/enc-base64';
-import { setCookies, removeCookies } from 'cookies-next';
-
+import Hash from './Hashing'
 
 class NewPassword extends React.Component {
     constructor(props) {
@@ -16,13 +12,7 @@ class NewPassword extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-  //TODO: bättre hashning
-  hashPassword(password) {
-    const hashDigest = sha256(password);
-    const hmacDigest = Base64.stringify(hmacSHA512(hashDigest, "test"));
-    console.log(hmacDigest);
-    return hmacDigest;
-  }
+  
 
     //Hantering av lösenord.
   //Hantering av nytt lösenord
@@ -30,7 +20,7 @@ class NewPassword extends React.Component {
     event.preventDefault();
     console.log("userid: ", this.props.userid, "lösen: ", );
     //Hasha lösenordet.
-    let hashedPassword = this.hashPassword(this.state.newPassword);
+    let hashedPassword = Hash(this.state.newPassword);
     console.log(hashedPassword);
     let newPassword = {
       pw: hashedPassword,
@@ -57,7 +47,7 @@ class NewPassword extends React.Component {
         return (
         <form onSubmit={this.handleSubmit}>
         <input
-          type='text'
+          type='password'
           placeholder='Enter new password...'
           onChange={this.handleChange}
           

@@ -20,10 +20,14 @@ const NavBar = () => {
         <rightSideBlock>
             <ul>
                 <li>
-                    <Link href='/userpage'>{name}</Link>
+                    <Link href='/userpage'>namn</Link>
+                </li>
+                <li>
+                    <Link href='/logout'>Logga out</Link>
                 </li>
             </ul>
         </rightSideBlock>
+
     </nav>
   )
 }

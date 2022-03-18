@@ -34,31 +34,28 @@ class Usercards extends React.Component {
 
     render() {
         return(
-        <>
-      <div className='container'>
-        <main className='main'>
-          <h1 className='title'>Login</h1>
-          <p className='description'>Välj användare</p>
-          <div className='grid'>
-            {this.state.userlist.map(({ name, id, image }) => (
-              <div onClick={(e) => this.choosePerson(e, id)}>
-                <div key={id} value={name} className='card'>
-                  <img src={image} width="100" alt="Profilbild" className="center"></img>
-                  <h2>
-                    {name}
-                  </h2>
-                  <Password userid={this.state.userid}/>
-                  <NewPassword userid={this.state.userid}/>
-                </div>
+          <>
+          <div className='container'>
+            <main className='main'>
+              <h1 className='title'>Login</h1>
+              <p className='description'>Välj användare</p>
+              <div className='grid'>
+                {this.state.userlist.map(({ name, id, image }) => (
+                  <div onClick={(e) => this.choosePerson(e, id)}>
+                    <div key={id} value={name} className='card'>
+                      <img src={image} width="100" alt="Profilbild" className="center"></img>
+                      <h2>
+                        {name}
+                      </h2>
+                      <Password userid={this.state.userid}/>
+                      <NewPassword userid={this.state.userid}/>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </main >
-      </div >
-     </>
-
-
-
+            </main >
+          </div >
+          </>
         )
 
 

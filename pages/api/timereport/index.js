@@ -3,9 +3,9 @@ const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseId = `${process.env.NOTION_DATABASE_ID_TIMEREPORTS}`;
 
-export default async function handler(request, res) {
-  const { method } = request;
-  console.log("request.body: ", request.body);
+export default async function handler(req, res) {
+  const { method } = req;
+  console.log("request.body: ", req);
 
   // GET (default request) to retrieve data
   // visit http://localhost:3000/api/timereport to view =)
@@ -27,31 +27,31 @@ export default async function handler(request, res) {
           title: [
             {
               text: {
-                content: `${request.body.note}`,
+                content: req.body[0],
               },
             },
           ],
         },
         Date: {
           date: {
-            start: `${request.body.date}`,
+            start: req.body[3],
           },
         },
         Hours: {
           type: "number",
-          number: parseInt(request.body.hours),
+          number: parseInt(req.body[1]),
         },
         Project: {
           relation: [
             {
-              id: `${request.body.project}`,
+              id: req.body[2],
             },
           ],
         },
         Person: {
           relation: [
             {
-              id: `${request.body.person}`,
+              id: req.body[4],
             },
           ],
         },

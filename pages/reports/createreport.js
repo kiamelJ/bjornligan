@@ -1,19 +1,16 @@
 import React from 'react'
-
-
 import Page from '../../components/StandardPage'
 
 
 
-class Reports extends React.Component {
+class CreateReport extends React.Component {
   render() {
     return (
       <>
-        <Page type={"Report"} />
+        <Page type={"CreateReport"} />
       </>
     )
   }
 }
 
-
-export default Reports;
+export default CreateReport;

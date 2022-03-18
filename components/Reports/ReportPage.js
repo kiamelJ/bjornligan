@@ -1,120 +1,88 @@
 import React from "react";
-import { getCookie } from "cookies-next";
+import { getCookie, removeCookies } from "cookies-next";
+import { useEffect, useState } from "react";
 import styles from '../../styles/Temp.module.css'
+import Router from 'next/router'
+import CheckCookie from "../Login/CheckCookie";
 
 /** props person-ID och project-ID
  * Namn?
  * */
-class FormTimeReport extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-    this.state = {
-      note: "",
-      date: "",
-      hours: "",
-      person: getCookie("Björnligan"),
-      project: getCookie("Project.Id"),
-    };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
 
-  handleChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+const Reports = () => {
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
+  
+  removeCookies("projectID");
 
-    this.setState({
-      [name]: value,
-    });
-  }
 
-  async handleSubmit(event) {
-    // Stop the form from submitting and refreshing the page.
-    event.preventDefault();
-    console.log(this.state);
-
-    const response = await fetch("../api/timereport", {
+  useEffect(() => {
+    setLoading(true);
+    fetch("../api/timereport/reports", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "plain/text",
       },
-      body: JSON.stringify(this.state),
-    });
+      body: getCookie("User"),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      })
+  }, []);
 
-    // Hmm: felhantering
-    // if(!response.ok){ }
-    console.log("INDEX", response);
-
-    // Hmm: clear the form out
-    // setValue(initialState);
+  const makeTimereport = async () => {
+    //Router.push("./reports/createreport");
+    let a = CheckCookie();
+    console.log(a);
   }
 
-  render() {
-    return (
-      <div className={styles.container}>
-        <form className={styles.form} onSubmit={this.handleSubmit}>
-          <div className={styles.inputs}>
-            <label htmlFor='note'>Note</label>
-            <input
-              name='note'
-              type='text'
-              placeholder='Enter comment...'
-              value={this.state.note}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
+  const removeTimereport = async (id) => {
+      event.preventDefault();
+      await fetch("../api/timereport/removereport", {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain",
+          },
+          body: id,
+        })
 
-          <label htmlFor='date'>Date</label>
-          <input
-            name='date'
-            type='text'
-            pattern='([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))'
-            title='(YYYY-MM-DD)'
-            placeholder='YYYY-MM-DD'
-            value={this.state.date}
-            onChange={this.handleChange}
-            required
-          />
-
-          <label htmlFor='hours'>Hours</label>
-          <input
-            name='hours'
-            type='number'
-            placeholder='Enter hours...'
-            pattern='^[0-9]*$'
-            value={this.state.hours}
-            onChange={this.handleChange}
-            required
-          />
-          {/* 
-        TODO: bort sen
-        <label htmlFor='project'>Project</label>
-        <input
-          name='project'
-          type='text'
-          placeholder='Select project...'
-          value={this.state.project}
-          onChange={this.handleChange}
-          required
-        />
-        TODO: bort sen
-        <label htmlFor='person'>Person</label>
-        <input
-          name='person'
-          type='text'
-          placeholder='Select person...'
-          value={this.state.person}
-          onChange={this.handleChange}
-          required
-        /> */}
-          <button type='submit'>Submit</button>
-        </form>
-      </div>
-    );
   }
+  
+
+  if (isLoading) return <p>Loading...</p>;
+  if (!data) return <p>No profile data</p>;
+  console.log(data.results);
+
+
+  
+
+  return(
+    <div className='container'>
+      <main className='main'>
+        <h1 className='title'>Tidsrapporter</h1>
+        <p className='description'></p>
+        <button onClick={() => { makeTimereport()}}>Ny tidsrapport</button>
+        <div className='grid'>
+          {data.results.map((project) => (
+            <li key={project.id} className='card'>
+              <h2>
+                {project.properties.Note.title[0].plain_text}
+              </h2>
+              <p>{project.properties.Date.date.start} - {project.properties.Hours.number} timmar</p>
+              <button onClick={() => { removeTimereport(project.id)}} disabled>Remove timereport</button>
+            </li>
+          ))}
+        </div>
+      </main>
+    </div>
+  )
+
+
 }
-export default FormTimeReport;
+
+// 
+export default Reports;
+
