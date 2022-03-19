@@ -9,60 +9,51 @@ import Link from 'next/link'
 
 const StandardPage = ({ type }) => {
 
-    if(checkCookies("User") && checkCookies("Username"))
+    if(type == "Project")
     {
-        if(type == "Project")
-        {
-            return (
-                <>
-                <NavBar />
-                <ProjectPage />
-                </>
-            )
-        }
-        
-        if(type == "Report")
-        {
-            return (
-                <>
-                <NavBar />
-                <ReportPage />
-                </>
-            )
-        }
-        if(type == "UserPage")
-        {
-            return(
-                <>
-                <NavBar />
-                <UserPage />
-                </>
-    
-            )
-        }
-        if(type == "CreateReport")
-        {
-            return(
-                <>
-                <NavBar />
-                <CreateReport />
-                </>
-            )
-        }
+        return (
+            <>
+            <NavBar />
+            <ProjectPage />
+            </>
+        )
     }
-    else
+    
+    if(type == "Report")
+    {
+        return (
+            <>
+            <NavBar />
+            <ReportPage />
+            </>
+        )
+    }
+    if(type == "UserPage")
     {
         return(
             <>
-            <h1>Inga kakor</h1>
-            <Link href='../'>Klicka här för att gå till login</Link>
+            <NavBar />
+            <UserPage />
+            </>
+
+        )
+    }
+    if(type == "CreateReport")
+    {
+        return(
+            <>
+            <NavBar />
+            <CreateReport />
             </>
         )
-
     }
     
-
-    
+    return(
+        <>
+        <h1>Inga kakor</h1>
+        <Link href='../'>Klicka här för att gå till login</Link>
+        </>
+    )
     
   };
   

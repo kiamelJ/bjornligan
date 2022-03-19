@@ -3,7 +3,6 @@ import { getCookie, removeCookies } from "cookies-next";
 import { useEffect, useState } from "react";
 import styles from '../../styles/Temp.module.css'
 import Router from 'next/router'
-import CheckCookie from "../Login/CheckCookie";
 
 /** props person-ID och project-ID
  * Namn?
@@ -35,8 +34,7 @@ const Reports = () => {
 
   const makeTimereport = async () => {
     //Router.push("./reports/createreport");
-    let a = CheckCookie();
-    console.log(a);
+    
   }
 
   const removeTimereport = async (id) => {

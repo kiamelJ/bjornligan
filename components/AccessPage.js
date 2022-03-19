@@ -1,4 +1,4 @@
-import UserCards from './Login/UserCards'
+import Login from './Login/Login'
 import Logout from './Login/Logout'
 
 
@@ -8,7 +8,7 @@ const AccessPage = ({type}) => {
     if(type == "Login")
     {
         return (
-        <UserCards />
+        <Login />
         );
     }
     if(type == "Logout")

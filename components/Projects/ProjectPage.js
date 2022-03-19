@@ -2,34 +2,35 @@ import react from "react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import FormTimeReport from "../Reports/ReportPage";
-import { setCookies, getCookie } from "cookies-next";
+import { setCookies, getCookie, checkCookies } from "cookies-next";
 import router from "next/router";
 
 
 const ProjectList = ({ projects }) => {
   const [data, setData] = useState(null);
+  const [correctData, setCorrectData] = useState(false);
   const [isLoading, setLoading] = useState(false);
 
 
   useEffect(() => {
     setLoading(true);
-    fetch("../api/people", {
+    fetch("../api/project/userprojects", {
       method: "POST",
       headers: {
         "Content-Type": "plain/text",
       },
-      body: getCookie("User"),
+      body: getCookie("token"),
     })
-      .then((res) => res.json())
+    .then((res) => res.json())
       .then((data) => {
         setData(data);
         setLoading(false);
-        //console.log(data);
-      });
+      })
   }, []);
 
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No profile data</p>;
+  if(data.msg == "bad cookie"){ router.push('/logout'); return(<></>) }
 
   function makeTimereport(projectId){
     //console.log(projectId)
@@ -61,3 +62,4 @@ const ProjectList = ({ projects }) => {
 
 
 export default ProjectList;
+

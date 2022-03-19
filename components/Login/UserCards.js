@@ -1,5 +1,5 @@
 import React from 'react'
-import Password from './Password'
+import Password from './Login'
 import NewPassword from './NewPassword'
 
 class Usercards extends React.Component {
