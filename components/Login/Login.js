@@ -10,67 +10,67 @@ const LoginPage = ({project}) => {
     const[username, setUsername] = useState();
     const[password, setPassword] = useState();
 
+
     const Login = async (event) =>{
         event.preventDefault();
-        let response;
-        await fetch("../api/login/login", {
+        let response = await fetch("../api/login/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({username: username, password: password}),
           })
-          .then(res => res.json())
-          .then(res => console.log(res));
+          .then(res => res.json());
+          console.log(response);
 
-          //console.log(response);
-
-
-          
+          if(response.success == true)
+          {
+            //router.push('./projects');
+          }
+          else if(response.success == false)
+          {
+        
+            console.log("fel lösen");
+          }
     }
-
-    function handleUsernameChange(event) {
-        const target = event.target;
-        const value = target.value;
-    
-        setUsername(value);
-      }
-
-      
-      function handlePasswordChange(event) {
-        const target = event.target;
-        const value = target.value;
-    
-        setPassword(value);
-      }
-
-    return(
-            <div className={styles.container}>
-              <form className={styles.form} onSubmit={Login}>
-                <div className={styles.inputs}>
-                  <label htmlFor='note'>Username</label>
-                  <input
-                    name='note'
-                    type='text'
-                    placeholder='Enter username...'
-                    onChange={handleUsernameChange}
-                    value={username}
-                    required
-                  />
-                </div>
-                <label htmlFor='project'>Password</label>
-                <input
-                name='project'
-                type='password'
-                placeholder='Select project...'
-                onChange={handlePasswordChange}
-                value={password}
+      return(
+        <div className={styles.container}>
+          <form className={styles.form} onSubmit={Login}>
+            <div className={styles.inputs}>
+              <label htmlFor='note'>Username</label>
+              <input
+                name='note'
+                type='text'
+                placeholder='Enter username...'
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
                 required
-                />
-                <button type='submit'>Log in</button>
-                </form>
+              />
             </div>
-    )
+            <label htmlFor='project'>Password</label>
+            <input
+            name='project'
+            type='password'
+            placeholder='Select project...'
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            required
+            />
+            <button type='submit'>Log in</button>
+            </form>
+        </div>
+        )
+    
+      return(
+        <>
+        <h1>Fel lösenord</h1>
+        <button type='submit' onClick={setWrongPassword("false")}>Klicka här för att gå tillbaka</button>
+        </>
+
+      )
+    
+
+    
 
 
 }
