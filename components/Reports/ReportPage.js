@@ -18,12 +18,12 @@ const Reports = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("../api/timereport/reports", {
+    fetch("../api/reports/reports", {
       method: "POST",
       headers: {
         "Content-Type": "plain/text",
       },
-      body: getCookie("User"),
+      body: getCookie("token"),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -39,7 +39,7 @@ const Reports = () => {
 
   const removeTimereport = async (id) => {
       event.preventDefault();
-      await fetch("../api/timereport/removereport", {
+      await fetch("../api/reports/removereport", {
           method: "POST",
           headers: {
             "Content-Type": "text/plain",
@@ -47,12 +47,13 @@ const Reports = () => {
           body: id,
         })
 
+        Router.reload(window.location.pathname);
+
   }
   
 
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No profile data</p>;
-  console.log(data.results);
 
 
   

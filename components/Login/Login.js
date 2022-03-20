@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from "react";
 
 import router from 'next/router'
+import jwt from 'jsonwebtoken'
 
 import styles from '../../styles/Temp.module.css'
 
@@ -20,12 +21,11 @@ const LoginPage = ({project}) => {
             body: JSON.stringify({username: username, password: password}),
           })
           .then(res => res.json())
-          .then(res => response = res);
+          .then(res => console.log(res));
 
-          if(response.success == true)
-          {
-            router.push("../projects");
-          }
+          //console.log(response);
+
+
           
     }
 

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import router from 'next/router'
+import dayjs from 'dayjs'
 
 import styles from '../../styles/Temp.module.css'
 
@@ -11,47 +12,30 @@ const CreateReport = ({project}) => {
     const[note, setNote] = useState();
     const[hour, setHour] = useState();
     const[currentProject, setProject] = useState(getCookie("projectID"));
-    const[person, setPerson] = useState(getCookie("UserID"));
     const [isLoading, setLoading] = useState(false);
-    const [date, onChange] = useState(new Date());
+    const [date, setDate] = useState(new Date());
+
+    const locale = 'sv';
 
     const MakeReport = async (event) =>{
         event.preventDefault();
-        await fetch("../api/timereport", {
+
+        const newDate = new Intl.DateTimeFormat('sv-SV').format(date);
+        
+        await fetch("../api/reports", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify([note, hour, currentProject, date, person]),
+            body: JSON.stringify([note, hour, currentProject, newDate, getCookie("token")]),
           })
 
           
         router.push("../reports");
     }
 
-    function handleProjectChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
     
-        setProject(value);
-      }
 
-      
-      function handleHourChange(event) {
-        const target = event.target;
-        const value = target.value;
-    
-        setHour(value);
-      }
-
-      function handleNoteChange(event) {
-        const target = event.target;
-        const value = target.value;
-    
-        setNote(value);
-      }
-    
 
 
     return(
@@ -63,14 +47,14 @@ const CreateReport = ({project}) => {
                     name='note'
                     type='text'
                     placeholder='Enter comment...'
-                    onChange={handleNoteChange}
+                    onChange={(e) => setNote(e.target.value)}
                     value={note}
                     required
                   />
                 </div>
       
                 <label htmlFor='date'>Date</label>
-                <div><Calendar onChange={onChange} maxDate = {new Date()} value={date} /></div>
+                <div><Calendar onChange={setDate} maxDate = {new Date()} value={date} /></div>
             
       
                 <label htmlFor='hours'>Hours</label>
@@ -79,7 +63,7 @@ const CreateReport = ({project}) => {
                   type='number'
                   placeholder='Enter hours...'
                   pattern='^[0-9]*$'
-                  onChange={handleHourChange}
+                  onChange={(e) => setHour(e.target.value)}
                   value={hour}
                   required
                 />
@@ -88,7 +72,7 @@ const CreateReport = ({project}) => {
                 name='project'
                 type='text'
                 placeholder='Select project...'
-                onChange={handleProjectChange}
+                onChange={(e) => setProject(e.target.value)}
                 value={currentProject}
                 required
                 />

@@ -7,7 +7,7 @@ const personId = `${process.env.NOTION_DATABASE_ID_PEOPLE}`;
 
 export default async function handler(req, res) {
     const { method } = req;
-    console.log("request.body: ", req.body);
+    //console.log("request.body: ", req.body);
     
     // POST (create new page in timereport database)
     if (method === "POST") {
@@ -33,6 +33,8 @@ export default async function handler(req, res) {
         });
 
         res.status(200).json(response);
+        return;
     }
+    res.status(403);
   }
   

@@ -6,6 +6,8 @@ import { setCookies, getCookie, checkCookies } from "cookies-next";
 import router from "next/router";
 
 
+
+
 const ProjectList = ({ projects }) => {
   const [data, setData] = useState(null);
   const [correctData, setCorrectData] = useState(false);
@@ -31,6 +33,7 @@ const ProjectList = ({ projects }) => {
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No profile data</p>;
   if(data.msg == "bad cookie"){ router.push('/logout'); return(<></>) }
+
 
   function makeTimereport(projectId){
     //console.log(projectId)

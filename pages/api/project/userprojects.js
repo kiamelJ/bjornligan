@@ -1,12 +1,18 @@
+import jwt from "jsonwebtoken";
+
 const { Client } = require("@notionhq/client");
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const peopleID = process.env.NOTION_DATABASE_ID_PEOPLE;
 const projectID = process.env.NOTION_DATABASE_ID_PROJECTS;
 
+import cookie from "cookie"
+
+const secretkey = "alshkdhasdlhaasdkasdasdasdadasdasdasdad1231d1d1d1asdda"
+
 
 export default async (req, res) => {
-    console.log(req.body);
+    //console.log(req.body);
 
     if(req.body == "")
     {
@@ -15,18 +21,56 @@ export default async (req, res) => {
         return;
     }
 
+    const decodedToken = jwt.verify(req.body, secretkey);
+    console.log(decodedToken);
+
+    console.log("exp: ", decodedToken.exp, "tid nu: ", Date.now() / 1000)
+
+
+    if(decodedToken.exp < Date.now() / 1000)
+    {
+        console.log("Gammal kaka")
+        res.setHeader("Set-Cookie", cookie.serialize("token", "", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV !== "development",
+            maxAge: new Date(0),
+            sameSite: "strict",
+            path: '/',
+        }));
+    
+        res.statusCode = 200;
+        res.json({msg: "Kakan är gammal"});
+        return;
+    }
+
     const user = await notion.databases.query({
         database_id: peopleID,
         filter: {
-            property: "Cookie",
-            number: { equals: parseInt(req.body), }
+            and: [{
+                property: "Username",
+                rich_text: { equals: decodedToken.username, }
+            },
+            {
+                property: "Password",
+                rich_text: { equals: decodedToken.password, }
+            }
+            ]
         }
     })
-
-    if(user.results.length == 0)
+    
+    if(!user)
     {
-        console.log("fel kaka")
-        res.status(401).send({msg: "bad cookie"});
+        console.log("Dålig kaka")
+        res.setHeader("Set-Cookie", cookie.serialize("token", "", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV !== "development",
+            maxAge: new Date(0),
+            sameSite: "strict",
+            path: '/',
+        }));
+    
+        res.statusCode = 200;
+        res.json({msg: "Kakan är dålig"});
         return;
     }
 

@@ -6,7 +6,7 @@ const NavBar = () => {
     let name = getCookie("Username");
   return (
     <nav className={navStyles.nav}>
-        <leftSideBlock>
+        <leftsideblock>
         <ul>
             <li>
                 <Link href='/projects'>Projekt</Link>
@@ -15,9 +15,9 @@ const NavBar = () => {
                 <Link href='/reports'>Rapporter</Link>
             </li>
         </ul>
-        </leftSideBlock>
+        </leftsideblock>
 
-        <rightSideBlock>
+        <rightsideblock>
             <ul>
                 <li>
                     <Link href='/userpage'>namn</Link>
@@ -26,7 +26,7 @@ const NavBar = () => {
                     <Link href='/logout'>Logga out</Link>
                 </li>
             </ul>
-        </rightSideBlock>
+        </rightsideblock>
 
     </nav>
   )

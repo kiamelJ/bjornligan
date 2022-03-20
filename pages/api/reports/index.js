@@ -2,10 +2,11 @@ const { Client } = require("@notionhq/client");
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseId = `${process.env.NOTION_DATABASE_ID_TIMEREPORTS}`;
+const personId = `${process.env.NOTION_DATABASE_ID_PEOPLE}`;
 
 export default async function handler(req, res) {
   const { method } = req;
-  console.log("request.body: ", req);
+  console.log("request.body: ", req.body);
 
   // GET (default request) to retrieve data
   // visit http://localhost:3000/api/timereport to view =)
@@ -18,6 +19,26 @@ export default async function handler(req, res) {
 
   // POST (create new page in timereport database)
   if (method === "POST") {
+
+    
+    const username = await notion.databases.query({
+      database_id: personId,
+      filter: {
+          property: "Cookie",
+          number: { equals: parseInt(req.body[4]), }
+      }
+    })
+
+    console.log(username);
+
+    if(!username)
+    {
+      res.status(401);
+      res.end();
+      return;
+    }
+
+
     const response = await notion.pages.create({
       parent: {
         database_id: databaseId,
@@ -51,7 +72,7 @@ export default async function handler(req, res) {
         Person: {
           relation: [
             {
-              id: req.body[4],
+              id: username.results[0].id,
             },
           ],
         },
