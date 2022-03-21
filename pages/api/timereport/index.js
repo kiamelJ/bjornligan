@@ -18,7 +18,6 @@ export default async function handler(request, res) {
 
   // POST (create new page in timereport database)
   if (method === "POST") {
-
     const response = await notion.pages.create({
       parent: {
         database_id: databaseId,
@@ -40,7 +39,7 @@ export default async function handler(request, res) {
         },
         Hours: {
           type: "number",
-          number: parseInt(request.body.hours),
+          number: parseInt(request.body.hour),
         },
         Project: {
           relation: [
