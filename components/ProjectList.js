@@ -28,7 +28,6 @@ const ProjectList = () => {
   if (!data) return <p>No profile data</p>;
 
   function makeTimereport(projectId) {
-
     console.log(projectId)
     setCookies("Project.Id", projectId)
     router.push("../timereport");

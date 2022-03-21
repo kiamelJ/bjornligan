@@ -9,47 +9,10 @@ import styles from '../styles/Temp.module.css'
 
 const ReportList = ({props}) => {
     const [data, setData] = useState(null);
-    const [isLoading, setLoading] = useState(false);
-  
-    useEffect(() => {
-      setLoading(true);
-      fetch("../api/people", {
-        method: "POST",
-        headers: {
-          "Content-Type": "plain/text",
-        },
-        body: getCookie("Björnligan"),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setData(data);
-          setLoading(false);
-          //console.log(data);
-        });
-    }, []);
-
-    if (isLoading) return <p>Loading...</p>;
-    if (!data) return <p>No profile data</p>;
-
+    
     
 
-    return (
-        <div className='container'>
-          <main className='main'>
-            <h1 className='title'>Aktiva Projekt</h1>
-            <p className='description'></p>
-            <div className='grid'>
-              {data.map((project) => (
-                <li key={project.id} id={project.id} className='card'>
-                  <h2>
-                    {project.properties.Projectname.title[0].plain_text}
-                  </h2>
-                </li>
-              ))}
-            </div>
-          </main>
-        </div>
-      );
+
 
 }
 
