@@ -43,7 +43,7 @@ const StandardPage = ({ type }) => {
     {
         return (
             <>
-            <NavBar />
+            <NavBar expiration={time}/>
             <ReportPage />
             </>
         )
@@ -52,7 +52,7 @@ const StandardPage = ({ type }) => {
     {
         return(
             <>
-            <NavBar />
+            <NavBar expiration={time}/>
             <UserPage />
             </>
 
@@ -62,7 +62,7 @@ const StandardPage = ({ type }) => {
     {
         return(
             <>
-            <NavBar />
+            <NavBar expiration={time}/>
             <CreateReport />
             </>
         )

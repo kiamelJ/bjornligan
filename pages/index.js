@@ -5,16 +5,16 @@ import LoginPage from '../components/AccessPage'
 
 
 
-class LoginPW extends React.Component {
+class Index extends React.Component {
   
   render() {
     return (
       <>
-        <LoginPage type={"Login"} />
+        <LoginPage type={"Login"}/>
       </>
     )
   }
 }
 
 
-export default LoginPW;
+export default Index;

@@ -16,9 +16,9 @@ export default async (req, res) => {
     }
 
     const decodedToken = jwt.verify(req.body, secretkey);
-    console.log(decodedToken);
+    //console.log(decodedToken);
 
-    console.log("exp: ", decodedToken.exp, "tid nu: ", Date.now() / 1000)
+    //console.log("exp: ", decodedToken.exp, "tid nu: ", Date.now() / 1000)
 
     if(decodedToken.exp - 45 < Date.now() / 1000)
     {

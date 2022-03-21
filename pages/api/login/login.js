@@ -28,11 +28,11 @@ export default async (req, res) => {
             {
                 console.log("hittat lösen");
 
-                let newtoken = jwt.sign({username: req.body.username, password:req.body.password }, secretkey, {expiresIn: "5m"});
+                let newtoken = jwt.sign({username: req.body.username, password:req.body.password }, secretkey, {expiresIn: "15m"});
 
                 res.setHeader("Set-Cookie", cookie.serialize("token", newtoken, {
                     secure: process.env.NODE_ENV !== "development",
-                    maxAge: 5 * 60,
+                    maxAge: 15 * 60,
                     sameSite: "strict",
                     //httpOnly: true,
                     path: '/',
