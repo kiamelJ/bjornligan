@@ -5,10 +5,9 @@ const Layout = ({ children }) => {
       <>
         <Nav />
         <div>
-        <main>{children}</main>
-    </div>
-      </>
-    
+          <main>{children}</main>
+        </div>
+      </> 
   )
 }
 

@@ -9,7 +9,7 @@ const ProjectList = () => {
   
   useEffect(() => {
     setLoading(true);
-    fetch("../api/people", {
+    fetch("../api/people/project", {
       method: "POST",
       headers: {
         "Content-Type": "plain/text",
@@ -20,7 +20,7 @@ const ProjectList = () => {
       .then((data) => {
         setData(data);
         setLoading(false);
-        //console.log(data);
+        console.log(data);
       });
   }, []);
 

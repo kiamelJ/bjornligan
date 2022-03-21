@@ -75,6 +75,7 @@ class FormTimeReport extends React.Component {
               placeholder='Enter comment...'
               value={this.state.note}
               onChange={this.handleChange}
+              //(e) => setPassword(e.target.value)
               required
             />
           </div>
