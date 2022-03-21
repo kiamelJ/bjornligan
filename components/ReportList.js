@@ -7,31 +7,7 @@ import styles from '../styles/Temp.module.css'
  * Namn?
  * */
 
-const ReportList = ({props}) => {
-    const [data, setData] = useState(null);
-    const [isLoading, setLoading] = useState(false);
-  
-    useEffect(() => {
-      setLoading(true);
-      fetch("../api/people", {
-        method: "POST",
-        headers: {
-          "Content-Type": "plain/text",
-        },
-        body: getCookie("Björnligan"),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setData(data);
-          setLoading(false);
-          //console.log(data);
-        });
-    }, []);
-
-    if (isLoading) return <p>Loading...</p>;
-    if (!data) return <p>No profile data</p>;
-
-    
+const ReportList = ({report}) => {
 
     return (
         <div className='container'>
@@ -39,11 +15,12 @@ const ReportList = ({props}) => {
             <h1 className='title'>Aktiva Projekt</h1>
             <p className='description'></p>
             <div className='grid'>
-              {data.map((project) => (
-                <li key={project.id} id={project.id} className='card'>
+              {report.response.results.map((data) => (
+                <li key={data.id} id={data.id} className='card'>
                   <h2>
-                    {project.properties.Projectname.title[0].plain_text}
+                    {data.properties.Note.title[0].plain_text}
                   </h2>
+                    {}
                 </li>
               ))}
             </div>
@@ -53,117 +30,4 @@ const ReportList = ({props}) => {
 
 }
 
-class FormTimeReport extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-    this.state = {
-      note: "",
-      date: "",
-      hours: "",
-      person: getCookie("Björnligan"),
-      project: getCookie("Project.Id"),
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  async handleSubmit(event) {
-    // Stop the form from submitting and refreshing the page.
-    event.preventDefault();
-    console.log(this.state);
-
-    const response = await fetch("../api/timereport", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(this.state),
-    });
-
-    // Hmm: felhantering
-    // if(!response.ok){ }
-    console.log("INDEX", response);
-
-    // Hmm: clear the form out
-    // setValue(initialState);
-  }
-
-  render() {
-    return (
-      <div className={styles.container}>
-        <form className={styles.form} onSubmit={this.handleSubmit}>
-          <div className={styles.inputs}>
-            <label htmlFor='note'>Note</label>
-            <input
-              name='note'
-              type='text'
-              placeholder='Enter comment...'
-              value={this.state.note}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-
-          <label htmlFor='date'>Date</label>
-          <input
-            name='date'
-            type='text'
-            pattern='([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))'
-            title='(YYYY-MM-DD)'
-            placeholder='YYYY-MM-DD'
-            value={this.state.date}
-            onChange={this.handleChange}
-            required
-          />
-
-          <label htmlFor='hours'>Hours</label>
-          <input
-            name='hours'
-            type='number'
-            placeholder='Enter hours...'
-            pattern='^[0-9]*$'
-            value={this.state.hours}
-            onChange={this.handleChange}
-            required
-          />
-          {/* 
-        TODO: bort sen
-        <label htmlFor='project'>Project</label>
-        <input
-          name='project'
-          type='text'
-          placeholder='Select project...'
-          value={this.state.project}
-          onChange={this.handleChange}
-          required
-        />
-
-        TODO: bort sen
-        <label htmlFor='person'>Person</label>
-        <input
-          name='person'
-          type='text'
-          placeholder='Select person...'
-          value={this.state.person}
-          onChange={this.handleChange}
-          required
-        /> */}
-          <button type='submit'>Submit</button>
-        </form>
-      </div>
-    );
-  }
-}
-export default FormTimeReport;
+export default ReportList;

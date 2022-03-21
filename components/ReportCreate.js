@@ -1,5 +1,5 @@
 import React from "react";
-import { getCookie } from "cookies-next";
+import { getCookie, getCookies } from "cookies-next";
 import { useEffect, useState } from "react";
 import styles from '../styles/Temp.module.css'
 
@@ -7,75 +7,48 @@ import styles from '../styles/Temp.module.css'
  * Namn?
  * */
 
-const ReportList = ({props}) => {
-    const [data, setData] = useState(null);
+const ReportCreate = () => {
+    // const [data, setData] = useState({
+    //   note: "",
+    //   date: "",
+    //   hours: 0,
+    //   person: getCookies("Björnligan"),
+    //   project: getCookie("Project.Id")
+    // });
+
+    const [note, setNote] = useState("");
+    const [date, setDate] = useState("");
+    const [hour, setHour] = useState(0);
+    const person = getCookies("Björnligan");
+    const project = getCookie("Project.Id");
+
     
     
+    
+    async function submitReport(){
 
+      console.log(note, date, hour, person, project);
 
+      await fetch("../api/timereport", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: note, date, hour, person, project,
+      });
+    }
 
-}
-
-class FormTimeReport extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-    this.state = {
-      note: "",
-      date: "",
-      hours: "",
-      person: getCookie("Björnligan"),
-      project: getCookie("Project.Id"),
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  async handleSubmit(event) {
-    // Stop the form from submitting and refreshing the page.
-    event.preventDefault();
-    console.log(this.state);
-
-    const response = await fetch("../api/timereport", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(this.state),
-    });
-
-    // Hmm: felhantering
-    // if(!response.ok){ }
-    console.log("INDEX", response);
-
-    // Hmm: clear the form out
-    // setValue(initialState);
-  }
-
-  render() {
     return (
       <div className={styles.container}>
-        <form className={styles.form} onSubmit={this.handleSubmit}>
+        <form className={styles.form} onSubmit={submitReport}>
           <div className={styles.inputs}>
             <label htmlFor='note'>Note</label>
             <input
               name='note'
               type='text'
               placeholder='Enter comment...'
-              value={this.state.note}
-              onChange={this.handleChange}
-              //(e) => setPassword(e.target.value)
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
               required
             />
           </div>
@@ -87,8 +60,8 @@ class FormTimeReport extends React.Component {
             pattern='([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))'
             title='(YYYY-MM-DD)'
             placeholder='YYYY-MM-DD'
-            value={this.state.date}
-            onChange={this.handleChange}
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             required
           />
 
@@ -98,36 +71,15 @@ class FormTimeReport extends React.Component {
             type='number'
             placeholder='Enter hours...'
             pattern='^[0-9]*$'
-            value={this.state.hours}
-            onChange={this.handleChange}
+            value={hour}
+            onChange={(e) => setHour(e.target.value)}
             required
           />
-          {/* 
-        TODO: bort sen
-        <label htmlFor='project'>Project</label>
-        <input
-          name='project'
-          type='text'
-          placeholder='Select project...'
-          value={this.state.project}
-          onChange={this.handleChange}
-          required
-        />
-
-        TODO: bort sen
-        <label htmlFor='person'>Person</label>
-        <input
-          name='person'
-          type='text'
-          placeholder='Select person...'
-          value={this.state.person}
-          onChange={this.handleChange}
-          required
-        /> */}
           <button type='submit'>Submit</button>
         </form>
       </div>
     );
-  }
+
 }
-export default FormTimeReport;
+
+export default ReportCreate;

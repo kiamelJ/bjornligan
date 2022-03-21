@@ -18,6 +18,7 @@ export default async function handler(request, res) {
 
   // POST (create new page in timereport database)
   if (method === "POST") {
+
     const response = await notion.pages.create({
       parent: {
         database_id: databaseId,
@@ -27,14 +28,14 @@ export default async function handler(request, res) {
           title: [
             {
               text: {
-                content: `${request.body.note}`,
+                content: request.body.note,
               },
             },
           ],
         },
         Date: {
           date: {
-            start: `${request.body.date}`,
+            start: request.body.date,
           },
         },
         Hours: {
@@ -44,14 +45,14 @@ export default async function handler(request, res) {
         Project: {
           relation: [
             {
-              id: `${request.body.project}`,
+              id: request.body.project,
             },
           ],
         },
         Person: {
           relation: [
             {
-              id: `${request.body.person}`,
+              id: request.body.person,
             },
           ],
         },
