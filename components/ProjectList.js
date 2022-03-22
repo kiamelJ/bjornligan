@@ -14,7 +14,7 @@ const ProjectList = () => {
       headers: {
         "Content-Type": "plain/text",
       },
-      body: getCookie("Björnligan"),
+      body: getCookie("User"),
     })
       .then((res) => res.json())
       .then((data) => {
