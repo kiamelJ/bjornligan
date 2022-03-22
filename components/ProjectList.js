@@ -26,6 +26,10 @@ const ProjectList = () => {
 
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No profile data</p>;
+  if(data.length == 0) return <p>Inga aktiva projekt</p>
+
+
+  console.log(test);
 
   function makeTimereport(projectId) {
     console.log(projectId)

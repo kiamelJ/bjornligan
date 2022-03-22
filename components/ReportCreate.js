@@ -16,11 +16,6 @@ const ReportCreate = () => {
       project: getCookie("Project.Id")
     });
 
-    // const [note, setNote] = useState("");
-    // const [date, setDate] = useState("");
-    // const [hour, setHour] = useState(0);
-    // const person = getCookies("Björnligan");
-    // const project = getCookie("Project.Id");
     
     
     async function submitReport(event){
