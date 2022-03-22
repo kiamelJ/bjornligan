@@ -12,15 +12,10 @@ const ReportCreate = () => {
       note: "",
       date: "",
       hour: 0,
-      person: getCookie("Björnligan"),
+      person: getCookie("User"),
       project: getCookie("Project.Id")
     });
 
-    // const [note, setNote] = useState("");
-    // const [date, setDate] = useState("");
-    // const [hour, setHour] = useState(0);
-    // const person = getCookies("Björnligan");
-    // const project = getCookie("Project.Id");
     
     
     async function submitReport(event){

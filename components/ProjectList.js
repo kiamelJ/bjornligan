@@ -14,7 +14,7 @@ const ProjectList = () => {
       headers: {
         "Content-Type": "plain/text",
       },
-      body: getCookie("Björnligan"),
+      body: getCookie("User"),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -26,6 +26,10 @@ const ProjectList = () => {
 
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No profile data</p>;
+  if(data.length == 0) return <p>Inga aktiva projekt</p>
+
+
+  console.log(test);
 
   function makeTimereport(projectId) {
     console.log(projectId)

@@ -1,8 +1,11 @@
 import ProjectListComponent from '../../components/ProjectList'
+import Layout from '../../components/Layout'
 
 const ProjectList = () => {
   return(
-    <ProjectListComponent />
+    <Layout>
+      <ProjectListComponent />
+    </Layout>
   )
 };
 

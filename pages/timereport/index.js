@@ -4,11 +4,14 @@ import styles from '../../styles/Temp.module.css'
 
 import ReportList from '../../components/ReportList'
 import ReportCreate from '../../components/ReportCreate'
+import Layout from '../../components/Layout'
 
  const Timereport = ({report}) => {
    return(
      <>
-     <ReportCreate />
+     <Layout>
+        <ReportCreate />
+     </Layout>
      {/* <ReportList report={report}/> */}
      </>
    )
