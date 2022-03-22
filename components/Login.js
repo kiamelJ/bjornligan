@@ -42,24 +42,8 @@ function Login() {
         console.log('Something went wrong.', error);
         alert("Fel login");
       });
-
-
     }
-  
 
-
-//   function choosePerson(e, name) {
-//     console.log(e);
-
-//     for (let i = 0; i < data.length; i++) {
-//       if (data[i].name === name) {
-//         setCookies("Björnligan", data[i].id);
-//       }
-//     }
-    
-//     //Används för att automatiskt gå vidare till nästa sida när en person är vald.
-//     Router.push("/project");
-//   }
 
   return (
     <div className={styles.container}>

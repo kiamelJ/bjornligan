@@ -12,7 +12,7 @@ const ReportCreate = () => {
       note: "",
       date: "",
       hour: 0,
-      person: getCookie("Björnligan"),
+      person: getCookie("User"),
       project: getCookie("Project.Id")
     });
 
