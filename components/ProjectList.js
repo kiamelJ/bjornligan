@@ -29,7 +29,7 @@ const ProjectList = () => {
   if(data.length == 0) return <p>Inga aktiva projekt</p>
 
 
-  console.log(test);
+  
 
   function makeTimereport(projectId) {
     console.log(projectId)
