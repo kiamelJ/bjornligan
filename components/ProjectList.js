@@ -37,19 +37,20 @@ const ProjectList = () => {
     <div className='container'>
       <main className='main'>
         <h1 className='title'>Aktiva Projekt</h1>
-        <p className='description'></p>
+        <p className='description'></p>        
         <div className='grid'>
           {data.map((project) => (
             <li key={project.id} id={project.id} className='card'>
               <h2>{project.properties.Projectname.title[0].plain_text}</h2>
-              <button
+               <div className='button-container'><button 
                 type='submit'
                 onClick={() => {
                   makeTimereport(project.id);
                 }}
               >
                 Ny tidrapport
-              </button>
+              </button> </div>
+               
             </li>
           ))}
         </div>

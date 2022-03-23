@@ -35,6 +35,7 @@ const ReportCreate = () => {
     <div className={styles.container}>
       <form className={styles.form} onSubmit={submitReport}>
         <div className={styles.inputs}>
+          <div>
           <label htmlFor='note'>Note</label>
           <input
             name='note'
@@ -46,6 +47,7 @@ const ReportCreate = () => {
             }
             required
           />
+          </div>
         </div>
 
         <label htmlFor='date'>Date</label>

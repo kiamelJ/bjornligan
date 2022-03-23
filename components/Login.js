@@ -42,6 +42,7 @@ function Login() {
     <div className={styles.container}>
       <form className={styles.form} onSubmit={LoginUser}>
         <div className={styles.inputs}>
+          <div>
           <label htmlFor='username'>Username</label>
           <input
             name='username'
@@ -56,6 +57,7 @@ function Login() {
             }
             required
           />
+          </div>
         </div>
         <label htmlFor='password'>Password</label>
         <input
@@ -68,7 +70,7 @@ function Login() {
           }
           required
         />
-        <button type='submit'>Logga in</button>
+        <button type='submit'>Login</button>
       </form>
     </div>
   );
