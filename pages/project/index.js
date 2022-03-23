@@ -1,12 +1,12 @@
-import ProjectListComponent from '../../components/ProjectList'
-import Layout from '../../components/Layout'
+import ProjectListComponent from "../../components/ProjectList";
+import Layout from "../../components/Layout";
 
 const ProjectList = () => {
-  return(
+  return (
     <Layout>
       <ProjectListComponent />
     </Layout>
-  )
+  );
 };
 
 export default ProjectList;

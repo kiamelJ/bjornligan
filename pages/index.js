@@ -1,9 +1,7 @@
-import LoginComponent from '../components/Login'
+import LoginComponent from "../components/Login";
 
 const ProjectList = () => {
-  return(
-    <LoginComponent />
-  )
+  return <LoginComponent />;
 };
 
 export default ProjectList;

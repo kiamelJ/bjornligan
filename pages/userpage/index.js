@@ -1,14 +1,14 @@
-import UserPageComponent from '../../components/Userpage'
-import LayoutComponent from '../../components/Layout'
+import UserPageComponent from "../../components/Userpage";
+import LayoutComponent from "../../components/Layout";
 
- const UserPage = () => {
-   return(
-     <>
-     <LayoutComponent>
+const UserPage = () => {
+  return (
+    <>
+      <LayoutComponent>
         <UserPageComponent />
-     </LayoutComponent>
-     </>
-   )
- };
+      </LayoutComponent>
+    </>
+  );
+};
 
- export default UserPage;
+export default UserPage;

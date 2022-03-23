@@ -1,6 +1,3 @@
-
-
-
 // function App() {
 //     const columns = React.useMemo(
 //       () => [
@@ -28,14 +25,14 @@
 //       ],
 //       []
 //     )
-  
+
 //     const data = React.useMemo(() => makeData(20), [])
-  
+
 //     return (
 //       <Styles>
 //         <Table columns={columns} data={data} />
 //       </Styles>
 //     )
 //   }
-  
+
 //   export default App
