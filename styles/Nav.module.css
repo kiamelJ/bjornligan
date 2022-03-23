@@ -13,8 +13,13 @@
   justify-content: center;
   align-items: center;
   list-style: none;
+  width: 100%;
 }
 
 .nav ul li a {
   margin: 5px 15px;
+}
+.rightMargin {
+  margin-right: auto;
+  
 }
