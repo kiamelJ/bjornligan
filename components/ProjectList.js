@@ -1,4 +1,3 @@
-import react from "react";
 import { useEffect, useState } from "react";
 import { setCookies, getCookie } from "cookies-next";
 import router from "next/router";
@@ -6,7 +5,7 @@ import router from "next/router";
 const ProjectList = () => {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
-  
+
   useEffect(() => {
     setLoading(true);
     fetch("../api/people/project", {
@@ -26,14 +25,11 @@ const ProjectList = () => {
 
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No profile data</p>;
-  if(data.length == 0) return <p>Inga aktiva projekt</p>
-
-
-  
+  if (data.length == 0) return <p>Inga aktiva projekt</p>;
 
   function makeTimereport(projectId) {
-    console.log(projectId)
-    setCookies("Project.Id", projectId)
+    console.log(projectId);
+    setCookies("Project.Id", projectId);
     router.push("../timereport");
   }
 
@@ -45,17 +41,15 @@ const ProjectList = () => {
         <div className='grid'>
           {data.map((project) => (
             <li key={project.id} id={project.id} className='card'>
-              <h2>
-                {project.properties.Projectname.title[0].plain_text}
-              </h2>
-              {/* <p>projektinfo</p> */}
-              {/* <button onClick={makeTimereport(project.id)}>Ny tidrapport</button> */}
-              <button type="submit" onClick={() => { makeTimereport(project.id) }}>Ny tidrapport</button>
-              {/* <Link href='../timereport'>
-                <a>
-                  <button onClick={makeTimereport(project.id)}>Ny tidrapport</button>
-                </a>
-              </Link> */}
+              <h2>{project.properties.Projectname.title[0].plain_text}</h2>
+              <button
+                type='submit'
+                onClick={() => {
+                  makeTimereport(project.id);
+                }}
+              >
+                Ny tidrapport
+              </button>
             </li>
           ))}
         </div>
