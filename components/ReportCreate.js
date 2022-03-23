@@ -31,7 +31,12 @@ const ReportCreate = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      });
+      })
+      .then((response) => {
+        if (response.ok) { 
+         alert("Tidsrapporten är skapad.")        
+        }   
+      })
     }
 
     return (
@@ -52,25 +57,10 @@ const ReportCreate = () => {
           <label htmlFor='date'>Date</label>
           <DatePicker
            dateFormat="yyyy-MM-dd"           
-           selected={data.date}
-                     
-          //  onChange={(e) => setData({...data, [e.target.name]: e.target.value})}
-          // onChange={(date) => setData(date)}
-          onChange={(e) => setData({...data, date: e})}
-          
+           selected={data.date}                   
+           onChange={(e) => setData({...data, date: e})}
+           required
           />
-          {
-          
-          /* <input
-            name='date'
-            type='text'
-            pattern='([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))'
-            title='(YYYY-MM-DD)'
-            placeholder='YYYY-MM-DD'
-            value={data.date}
-            onChange={(e) => setData({...data, [e.target.name]: e.target.value})}
-            required
-          /> */}
 
           <label htmlFor='hour'>Hours</label>
           <input
