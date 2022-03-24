@@ -5,6 +5,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../styles/Temp.module.css";
 
+import parseISO from 'date-fns/parseISO'
+import { format, toDate } from 'date-fns'
+
 const ReportCreate = () => {
   const [data, setData] = useState({
     note: "",
@@ -17,6 +20,8 @@ const ReportCreate = () => {
   async function submitReport(event) {
     event.preventDefault();
     console.log("input: ", data);
+
+    data.date = new Intl.DateTimeFormat('sv-SV').format(data.date);
 
     await fetch("../api/timereport", {
       method: "POST",
