@@ -12,14 +12,25 @@ const peopleID = `${process.env.NOTION_DATABASE_ID_PEOPLE}`;
 export default async function handler(req, res) {
     //console.log("request.body: ", req.body);
 
-    if(req.body == "")
-    {
-        console.log("ingen data");
-        res.status(401).send({msg: "bad cookie"});
-        return;
+    let newString = "";
+
+    for(let i = 0; i < req.headers.cookie.length; i++)
+    {   
+        if(req.headers.cookie[i] == '=' && req.headers.cookie[i-1] == 'n')
+        {
+            for(let j = i + 1; j < req.headers.cookie.length; j++)
+            {
+                if(req.headers.cookie[j] == ';')
+                {
+                    break;
+                }
+                newString += req.headers.cookie[j];
+            }
+            break;
+        }
     }
 
-    const decodedToken = jwt.verify(req.body, secretkey);
+    const decodedToken = jwt.verify(newString, secretkey);
     console.log(decodedToken);
 
     console.log("exp: ", decodedToken.exp, "tid nu: ", Date.now() / 1000)

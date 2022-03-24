@@ -1,8 +1,8 @@
 import React from "react";
 import { getCookie, removeCookies } from "cookies-next";
 import { useEffect, useState } from "react";
-import styles from '../../styles/Temp.module.css'
 import Router from 'next/router'
+
 
 /** props person-ID och project-ID
  * Namn?
@@ -18,13 +18,7 @@ const Reports = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("../api/reports/reports", {
-      method: "POST",
-      headers: {
-        "Content-Type": "plain/text",
-      },
-      body: getCookie("token"),
-    })
+    fetch("../api/reports/reports")
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -46,7 +40,6 @@ const Reports = () => {
           },
           body: id,
         })
-
         Router.reload(window.location.pathname);
 
   }
@@ -54,9 +47,6 @@ const Reports = () => {
 
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No profile data</p>;
-
-
-  
 
   return(
     <div className='container'>
@@ -67,11 +57,15 @@ const Reports = () => {
         <div className='grid'>
           {data.results.map((project) => (
             <li key={project.id} className='card'>
+              <div className='leftsidecard'>
               <h2>
                 {project.properties.Note.title[0].plain_text}
               </h2>
               <p>{project.properties.Date.date.start} - {project.properties.Hours.number} timmar</p>
               <button onClick={() => { removeTimereport(project.id)}} disabled>Remove timereport</button>
+              </div>
+              <div className='rightsidecard'>
+              </div>
             </li>
           ))}
         </div>

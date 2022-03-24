@@ -80,6 +80,7 @@
 }
 
 .card {
+  display: flex;
   margin: 0.5rem;
   padding: 1rem;
   text-align: left;
@@ -90,6 +91,23 @@
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.leftsidecard{
+  width: 50%;
+}
+
+.rightsidecard{
+  display: flex;
+  width: 50%;
+  justify-content: right;
+}
+
+.centercard{
+  width: 100%;
+  text-align: center;
 }
 
 

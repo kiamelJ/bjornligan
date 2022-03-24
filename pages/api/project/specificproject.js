@@ -1,12 +1,21 @@
+import jwt from "jsonwebtoken";
+
 const { Client } = require("@notionhq/client");
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
-const databaseId = `${process.env.NOTION_DATABASE_ID_PROJECTS}`;
+const peopleID = process.env.NOTION_DATABASE_ID_PEOPLE;
+const projectID = process.env.NOTION_DATABASE_ID_PROJECTS;
+
+import cookie from "cookie"
+
+const secretkey = "alshkdhasdlhaasdkasdasdasdadasdasdasdad1231d1d1d1asdda"
 
 // GET (default request) to retrieve data (all pages in Project db)
 // visit http://localhost:3000/api/project to view =)
-export default async function handler(request, res) {
+export default async function handler(req, res) {
   let newString = "";
+
+    //console.log(req.body.id);
 
     for(let i = 0; i < req.headers.cookie.length; i++)
     {   
@@ -75,7 +84,7 @@ export default async function handler(request, res) {
             }
             ]
         }
-    })
+    })    
     
     if(!user)
     {
@@ -94,7 +103,23 @@ export default async function handler(request, res) {
     }
 
 
-    
+    const project = await notion.pages.retrieve({
+        page_id: req.body.id,
+    })
 
+
+    const data = [{
+        name: project.properties.Projectname.title[0].plain_text,
+        totalhours: project.properties.Hours.number,
+        workedhours: project.properties["Worked hours"].rollup.number,
+        hoursleft: project.properties["Hours left"].formula.number
+    }
+]
+
+    console.log(data);
+
+    res.statusCode = 200;
+    res.json(JSON.stringify(data));
+    return;
 
 }

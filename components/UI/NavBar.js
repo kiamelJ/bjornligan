@@ -1,18 +1,41 @@
 import navStyles from '../../styles/NavBar.module.css'
 import Link from 'next/link'
 import { getCookie } from 'cookies-next'
-import{ useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { useState, useEffect, useRef } from 'react'
 
-const NavBar = ({expiration}) => {
-    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(expiration));
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setTimeLeft(calculateTimeLeft(expiration));
-        }, 1000);
-        console.log();
-        return () => clearTimeout(timer);
-    });
+const NavBar = ({time}) => {
+    // const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(time));
+    // const [time, setTime] = useState(0);
+
+    // const router = useRouter();
+
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         setTimeLeft(calculateTimeLeft(time));
+    //     }, 1000);
+    //     console.log();
+    //     return () => clearTimeout(timer);
+    // });
+
+    // useInterval(() => {
+    //     console.log("testa kaka")
+    //     fetch("../api/login/checkcookietime")
+    //     .then((response) => {
+    //         if (response.ok) { 
+    //          return response.json();
+    //         }
+    //         return Promise.reject(response); 
+    //       })
+    //       .then((result) => { 
+    //         console.log(result);
+    //       })
+    //       .catch((error) => {
+    //         console.log('Something went wrong.', error);
+    //         router.push('/');
+    //       });
+    // }, 1000 * 5);
 
   return (
     <nav className={navStyles.nav}>
@@ -30,7 +53,7 @@ const NavBar = ({expiration}) => {
         <rightsideblock>
             <ul>
                 <li>
-                    Countdown: {Math.trunc(timeLeft)}
+                    {/* //Countdown: {Math.trunc(timeLeft)} sekunder */}
                 </li>
                 <li>
                     <Link href='/userpage'>namn</Link>
@@ -47,28 +70,45 @@ const NavBar = ({expiration}) => {
 
 export default NavBar
 
-const calculateTimeLeft = (expiration) => {
-    let timeNow = new Date() / 1000;
-    let difference = expiration - timeNow;
+// const calculateTimeLeft = (expiration) => {
+//     let timeNow = new Date() / 1000;
+//     let difference = expiration - timeNow;
 
-    let timeLeft = {}
-
-    if(difference < 0)
-    {
-        return 0;
-    }
-
-    //if(difference > 0)
-    // {
-    //     timeLeft = {
-    //         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-    //         minutes: Math.floor((difference / 1000 / 60) % 60),
-    //         seconds: Math.floor((difference / 1000) % 60)
-    //     };
+//     if(difference < 0)
+//     {
+//         return 0;
+//     }
+//     //if(difference > 0)
+//     // {
+//     //     timeLeft = {
+//     //         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+//     //         minutes: Math.floor((difference / 1000 / 60) % 60),
+//     //         seconds: Math.floor((difference / 1000) % 60)
+//     //     };
     
-    //}
-    console.log("exp: ", expiration, "difference: ", difference, "timeleft: ", timeLeft);
-    return difference;
+//     //}
+//     //console.log("exp: ", expiration, "difference: ", difference, "timeleft: ", timeLeft);
+//     return difference;
 
 
-}
+// }
+
+// function useInterval(callback, delay) {
+//     const savedCallback = useRef();
+  
+//     // Remember the latest callback.
+//     useEffect(() => {
+//       savedCallback.current = callback;
+//     }, [callback]);
+  
+//     // Set up the interval.
+//     useEffect(() => {
+//       function tick() {
+//         savedCallback.current();
+//       }
+//       if (delay !== null) {
+//         let id = setInterval(tick, delay);
+//         return () => clearInterval(id);
+//       }
+//     }, [delay]);
+//   }

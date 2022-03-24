@@ -16,13 +16,7 @@ const ProjectList = ({ projects }) => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("../api/project/userprojects", {
-      method: "POST",
-      headers: {
-        "Content-Type": "plain/text",
-      },
-      body: getCookie("token"),
-    })
+    fetch("../api/project/userprojects")
     .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -35,12 +29,17 @@ const ProjectList = ({ projects }) => {
   if(data.msg == "bad cookie"){ router.push('/logout'); return(<></>) }
 
 
-  function makeTimereport(projectId){
+  function makeTimereport(projectID){
     //console.log(projectId)
-    setCookies("projectID",projectId)
-    router.push("../reports/createreport");
+    //setCookies("projectID",projectId)
+    router.push({pathname: "../reports/createreport", query: {id: projectID}});
   }
-  //console.log(data);
+
+  function MoreInfo(projectID){
+
+
+    router.push({pathname: "../projects/specificproject", query: {id: projectID}});
+  }
 
   return (
     <div className='container'>
@@ -50,11 +49,20 @@ const ProjectList = ({ projects }) => {
         <div className='grid'>
           {data.map((project) => (
             <li key={project.id} id={project.id} className='card'>
+              <div className='leftsidecard'>
               <h2>
                 {project.properties.Projectname.title[0].plain_text}
               </h2>
               <p>{project.properties.Status.select.name}</p>
               <button type="submit" onClick={() => { makeTimereport(project.id) }}>Ny tidrapport</button>
+              <button type="submit" onClick={() => {MoreInfo(project.id)}}>Mer information</button>
+              </div>
+              <div className='rightsidecard'>
+                {project.properties.Timespan.date.start} - {project.properties.Timespan.date.end}<br/>
+                Timmar: {project.properties.Hours.number}<br/>
+                Timmar kvar: {project.properties["Hours left"].formula.number}<br/>
+                Timmar arbetade: {project.properties["Worked hours"].rollup.number}
+              </div>
             </li>
           ))}
         </div>

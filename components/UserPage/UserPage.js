@@ -11,13 +11,7 @@ const UserPage = () => {
 
   useEffect(() => {
     setLoading(true)
-    fetch('../api/people/getuser', {
-      method: "POST",
-      headers: {
-        "Content-Type": "plain/text",
-      },
-      body: getCookie("token"),
-    })
+    fetch('../api/people/getuser')
       .then((res) => res.json())
       .then((data) => {
         setData(data)
@@ -39,15 +33,20 @@ const UserPage = () => {
         <main className='main'>
           <div className='grid'>
                 <div className='card'>
+                  <div className='centercard'>
                   <img src={data.specificUser.properties.Image.files[0].file.url} width="100" alt="Profilbild" className="center"></img>
                   <h2>
                     {data.specificUser.properties.Name.title[0].plain_text}
                   </h2>
-                  Jobbade timmar: {data.specificUser.properties["Total hours"].rollup.number}
+                  Användarnamn: <strong>{data.specificUser.properties.Username.rich_text[0].plain_text}</strong><br/>
+                  Jobbade timmar: <strong>{data.specificUser.properties["Total hours"].rollup.number}</strong><br/>
+                  Antal Projekt: <strong>{data.specificUser.properties.Projects.relation.length}</strong>
                 </div>
-                <button>Byta lösenord</button>
-                <button>Byta användarnamn</button>
+                </div>
               </div>
+              <button>Byta lösenord</button>
+              <button>Byta användarnamn</button>
+              <button>Byta profilbild</button>
               
             
         </main >

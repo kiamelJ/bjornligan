@@ -25,7 +25,7 @@ const LoginPage = ({project}) => {
 
           if(response.success == true)
           {
-            //router.push('./projects');
+            router.push('./projects');
           }
           else if(response.success == false)
           {

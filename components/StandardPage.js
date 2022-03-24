@@ -3,37 +3,23 @@ import ProjectPage from './Projects/ProjectPage'
 import ReportPage from './Reports/ReportPage'
 import UserPage from './UserPage/UserPage'
 import CreateReport from './Reports/CreateReport'
+import SpecificProject from './Projects/SpecificProject'
 import { getCookie } from 'cookies-next'
 import Link from 'next/link'
 
 import { useState, useEffect, useRef } from 'react'
 
 
-
 const StandardPage = ({ type }) => {
-    const [time, setTime] = useState(0);
     const [showAlert, setShowAlert] = useState(true);
-
-    useInterval(() => {
-        console.log("testa kaka")
-        fetch("../api/login/checkcookietime", {
-            method: "POST",
-            headers: {
-                "Content-Type": "plain/text",
-            },
-            body: getCookie("token"),
-            })
-            .then((res) => res.json())
-            .then(res => setTime(res.timeleft))
-            //.then(console.log(time))
-    }, 1000 * 3);
+    
 
 
     if(type == "Project")
     {
         return (
             <>
-            <NavBar expiration={time}/>
+            <NavBar />
             <ProjectPage />
             </>
         )
@@ -43,7 +29,7 @@ const StandardPage = ({ type }) => {
     {
         return (
             <>
-            <NavBar expiration={time}/>
+            <NavBar />
             <ReportPage />
             </>
         )
@@ -52,7 +38,7 @@ const StandardPage = ({ type }) => {
     {
         return(
             <>
-            <NavBar expiration={time}/>
+            <NavBar />
             <UserPage />
             </>
 
@@ -62,8 +48,17 @@ const StandardPage = ({ type }) => {
     {
         return(
             <>
-            <NavBar expiration={time}/>
+            <NavBar />
             <CreateReport />
+            </>
+        )
+    }
+    if(type == "SpecificProject")
+    {
+        return(
+            <>
+            <NavBar />
+            <SpecificProject />
             </>
         )
     }
@@ -79,22 +74,4 @@ const StandardPage = ({ type }) => {
   
   export default StandardPage;  
 
-  function useInterval(callback, delay) {
-    const savedCallback = useRef();
-  
-    // Remember the latest callback.
-    useEffect(() => {
-      savedCallback.current = callback;
-    }, [callback]);
-  
-    // Set up the interval.
-    useEffect(() => {
-      function tick() {
-        savedCallback.current();
-      }
-      if (delay !== null) {
-        let id = setInterval(tick, delay);
-        return () => clearInterval(id);
-      }
-    }, [delay]);
-  }
+ 

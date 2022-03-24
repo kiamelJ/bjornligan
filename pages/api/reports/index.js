@@ -1,8 +1,13 @@
+import jwt from 'jsonwebtoken'
+
 const { Client } = require("@notionhq/client");
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseId = `${process.env.NOTION_DATABASE_ID_TIMEREPORTS}`;
-const personId = `${process.env.NOTION_DATABASE_ID_PEOPLE}`;
+const peopleID = `${process.env.NOTION_DATABASE_ID_PEOPLE}`;
+
+
+const secretkey = "alshkdhasdlhaasdkasdasdasdadasdasdasdad1231d1d1d1asdda"
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -20,23 +25,42 @@ export default async function handler(req, res) {
   // POST (create new page in timereport database)
   if (method === "POST") {
 
-    
-    const username = await notion.databases.query({
-      database_id: personId,
-      filter: {
-          property: "Cookie",
-          number: { equals: parseInt(req.body[4]), }
-      }
-    })
+    let newString = "";
 
-    console.log(username);
-
-    if(!username)
-    {
-      res.status(401);
-      res.end();
-      return;
+    for(let i = 0; i < req.headers.cookie.length; i++)
+    {   
+        if(req.headers.cookie[i] == '=' && req.headers.cookie[i-1] == 'n')
+        {
+            for(let j = i + 1; j < req.headers.cookie.length; j++)
+            {
+                if(req.headers.cookie[j] == ';')
+                {
+                    break;
+                }
+                newString += req.headers.cookie[j];
+            }
+            break;
+        }
     }
+
+    const decodedToken = jwt.verify(newString, secretkey);
+
+    const user = await notion.databases.query({
+      database_id: peopleID,
+      filter: {
+          and: [{
+              property: "Username",
+              rich_text: { equals: decodedToken.username, }
+          },
+          {
+              property: "Password",
+              rich_text: { equals: decodedToken.password, }
+          }
+          ]
+      }
+  })
+
+    console.log(1);
 
 
     const response = await notion.pages.create({
@@ -72,7 +96,7 @@ export default async function handler(req, res) {
         Person: {
           relation: [
             {
-              id: username.results[0].id,
+              id: user.results[0].id,
             },
           ],
         },
