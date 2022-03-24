@@ -1,22 +1,22 @@
-import navStyles from '../styles/Nav.module.css'
-import Link from 'next/link'
+import navStyles from "../styles/Nav.module.css";
+import Link from "next/link";
 
 const Nav = () => {
   return (
     <nav className={navStyles.nav}>
-        <ul>           
-            <li>
-                <Link href='/project'>Projekt</Link>
-            </li>           
-            <li className={navStyles.rightMargin}>
-                <Link href='/userpage'>Min sida</Link>
-            </li>
-            <li>                
-                <Link href='/'>Logga ut</Link>
-            </li>
-        </ul>
+      <ul>
+        <li>
+          <Link href="/project">Projects</Link>
+        </li>
+        <li className={navStyles.rightMargin}>
+          <Link href="/userpage">Profile</Link>
+        </li>
+        <li>
+          <Link href="/">Log out</Link>
+        </li>
+      </ul>
     </nav>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;

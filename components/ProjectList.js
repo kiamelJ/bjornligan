@@ -36,22 +36,22 @@ const ProjectList = () => {
   }
 
   return (
-    <div className='container'>
-      <main className='main'>
-        <h1 className='title'>Projects</h1>
-        <p className='description'>{message}</p>
-        <div className='grid'>
+    <div className="container">
+      <main className="main">
+        <h1 className="title">Projects</h1>
+        <p className="description">{message}</p>
+        <div className="grid">
           {data.map((project) => (
-            <li key={project.id} id={project.id} className='card'>
+            <li key={project.id} id={project.id} className="card">
               <h2>{project.properties.Projectname.title[0].plain_text}</h2>
-              <div className='button-container'>
+              <div className="button-container">
                 <button
-                  type='submit'
+                  type="submit"
                   onClick={() => {
                     makeTimereport(project.id);
                   }}
                 >
-                  Ny tidrapport
+                  Create report
                 </button>{" "}
               </div>
             </li>
