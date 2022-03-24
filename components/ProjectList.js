@@ -24,8 +24,9 @@ const ProjectList = () => {
   }, []);
 
   if (isLoading) return <p>Loading...</p>;
-  if (!data) return <p>No profile data</p>;
-  if (data.length == 0) return <p>Inga aktiva projekt</p>;
+
+  const message =
+    data.length === 0 ? "You have no active projects" : "Active projects";
 
   function makeTimereport(projectId) {
     console.log(projectId);
@@ -36,21 +37,22 @@ const ProjectList = () => {
   return (
     <div className='container'>
       <main className='main'>
-        <h1 className='title'>Aktiva Projekt</h1>
-        <p className='description'></p>        
+        <h1 className='title'>Projects</h1>
+        <p className='description'>{message}</p>
         <div className='grid'>
           {data.map((project) => (
             <li key={project.id} id={project.id} className='card'>
               <h2>{project.properties.Projectname.title[0].plain_text}</h2>
-               <div className='button-container'><button 
-                type='submit'
-                onClick={() => {
-                  makeTimereport(project.id);
-                }}
-              >
-                Ny tidrapport
-              </button> </div>
-               
+              <div className='button-container'>
+                <button
+                  type='submit'
+                  onClick={() => {
+                    makeTimereport(project.id);
+                  }}
+                >
+                  Ny tidrapport
+                </button>{" "}
+              </div>
             </li>
           ))}
         </div>
