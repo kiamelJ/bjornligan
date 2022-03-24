@@ -24,7 +24,8 @@ const ProjectList = () => {
   }, []);
 
   if (isLoading) return <p>Loading...</p>;
-
+  if (!data) return <p>No profile data</p>;
+  // if (data.length == 0) return <p>Inga aktiva projekt</p>;
   const message =
     data.length === 0 ? "You have no active projects" : "Active projects";
 
