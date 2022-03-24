@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { setCookies, getCookie } from "cookies-next";
 import router from "next/router";
+import Loader from '../components/Loader'
 
 const ProjectList = () => {
   const [data, setData] = useState(null);
@@ -23,7 +24,7 @@ const ProjectList = () => {
       });
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader />;
   if (!data) return <p>No profile data</p>;
   // if (data.length == 0) return <p>Inga aktiva projekt</p>;
   const message =
