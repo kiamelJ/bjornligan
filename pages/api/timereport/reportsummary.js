@@ -22,7 +22,7 @@ export default async function handler(req, res) {
         summary.push({name: users.results[i].properties.Name.title[0].plain_text, id: users.results[i].id, hours: 0});
     }
     
-    if(req.body.endDate == "")
+    if(req.body.endDate == null)
     {
         console.log(1);
         const response = await notion.databases.query({
@@ -34,6 +34,8 @@ export default async function handler(req, res) {
                   },
                 },  
           });
+
+
 
         
         for(let i = 0; i < response.results.length; i++)
@@ -47,12 +49,13 @@ export default async function handler(req, res) {
             }
         }
         
-          
+        console.log(summary);
         res.status(200).json(JSON.stringify(summary));
         return;
     }
     else
     {
+
         const response = await notion.databases.query({
             database_id: reportID,
             filter: {
@@ -85,6 +88,7 @@ export default async function handler(req, res) {
             }
         
             
+        console.log(summary);
           res.status(200).json(JSON.stringify(summary));
         return;
     }

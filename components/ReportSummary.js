@@ -2,126 +2,189 @@ import React from "react";
 import { getCookie } from "cookies-next";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import styles from "../styles/Temp.module.css";
+import { registerLocale, setDefaultLocale } from  "react-datepicker";
+import Loader from "./Loader"
 
-import parseISO from 'date-fns/parseISO'
-import { format, toDate } from 'date-fns'
-import { makeConsoleLogger } from "@notionhq/client/build/src/logging";
+import "react-datepicker/dist/react-datepicker.css";
+
+import { isoParse } from 'date-fns'
 
 const ReportCreate = () => {
   const [data, setData] = useState({
-    startDate: "",
-    endDate: "",
+    startDate: new Date(),
+    endDate: new Date(),
   });
+
+  const [newdata, setnewData] = useState({
+    startDate: new Date(),
+    endDate: new Date(),
+  });
+  
   const [checked, setChecked] = useState(false);
 
-  const [reports, setReports] = useState();
   const [isLoading, setLoading] = useState(false);
+
+  const [reports, setReports] = useState(null);
+
+
 
 
   async function submitReport(event) {
     event.preventDefault();
-    console.log("input: ", data);
+    console.log(!Number.isNaN(new Date(data.startDate).getTime()));
     setLoading(true);
-
-    if(data.endDate != "")
-    {
-        data.startDate = new Intl.DateTimeFormat('sv-SV').format(data.startDate);
-        data.endDate = new Intl.DateTimeFormat('sv-SV').format(data.endDate);
-    }
-    else
-    {
-        data.startDate = new Intl.DateTimeFormat('sv-SV').format(data.startDate);
-    }
-
-    console.log(data);
+    newdata.startDate = new Intl.DateTimeFormat('sv-SV').format(data.startDate);
+    newdata.endDate = new Intl.DateTimeFormat('sv-SV').format(data.endDate);
 
     await fetch("../api/timereport/reportsummary", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(newdata),
     })
-    .then(res => res.json())
-    .then(res => setReports(res))
-    .then(console.log(reports))
-    .then(setLoading(false));
+    .then((res) => res.json())
+      .then((data) => {
+        setReports(data);
+        console.log(data);
+        setLoading(false);
+      });
   }
 
   const handleChange = () => {
     setChecked(!checked);
+    data.startDate = new Date();
+    data.endDate = new Date();
+    setReports(null);
   };
 
-  if(checked && !reports)
+  if(isLoading) return <Loader />;
+  
+  if(checked)
   {
+    if(!reports)
+    {
       return (
-    <div className={styles.container}>
-      <form className={styles.form} onSubmit={submitReport}>
-      <label>Span
-        <input type="checkbox" checked={checked} onChange={handleChange}></input>
-        </label>
-        <label htmlFor="startDate">Start Date</label>
-        <DatePicker
+        <>
+        <label>Span
+          <input type="checkbox" checked={checked} onChange={handleChange}></input>
+          </label>
+          
+          <br/>
+          <label htmlFor="startDate">Start Date</label>
+          <DatePicker
           dateFormat="yyyy-MM-dd"
           selected={data.startDate}
           onChange={(e) => setData({ ...data, startDate: e })}
           required
         />
-
-        <label htmlFor="endDate">End Date</label>
-        <DatePicker
+          <label htmlFor="endDate">End Date</label>
+          <DatePicker
           dateFormat="yyyy-MM-dd"
           selected={data.endDate}
           onChange={(e) => setData({ ...data, endDate: e })}
           required
-        />  
-        
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  );
-  }
-  else if(!checked && !reports)
-  {
-    return (
-        <div className={styles.container}>
-          <form className={styles.form} onSubmit={submitReport}>
+          />
+          <button onClick={submitReport}>Submit</button>
+          </>
+    );
+    }
+    else if(reports)
+    {
+      
+      console.log("report1");
+      const message = !checked ? "Timereports for " + newdata.startDate : "Timereports for " + newdata.startDate + " - " + newdata.endDate;
+      return(
+        <>
           <label>Span
-            <input type="checkbox" checked={checked} onChange={handleChange}></input>
-            </label>
-            <label htmlFor="startDate">Date</label>
-            <DatePicker
-              dateFormat="yyyy-MM-dd"
-              selected={data.startDate}
-              onChange={(e) => setData({ ...data, startDate: e })}
-              required
-            />
-            <button type="submit">Submit</button>
-          </form>
+          <input type="checkbox" checked={checked} onChange={handleChange}></input>
+          </label>
+          
+          <br/>
+          <label htmlFor="startDate">Start Date</label>
+          <DatePicker
+          dateFormat="yyyy-MM-dd"
+          selected={data.startDate}
+          onChange={(e) => setData({ ...data, startDate: e })}
+          required
+        />
+          <label htmlFor="endDate">End Date</label>
+          <DatePicker
+          dateFormat="yyyy-MM-dd"
+          selected={data.endDate}
+          onChange={(e) => setData({ ...data, endDate: e })}
+          required
+          />
+          <button onClick={submitReport}>Submit</button>
+       
+        <p className="description">{message}</p>
+        <div className="grid">
+        {reports.map((report) => (
+            <li key={report.name} className="card">
+            <h2><strong>{report.name}</strong></h2><br/>
+            Worked hours: {report.hours}              
+            </li>
+        ))}
         </div>
-      );
+        </>
+      )
+    }
   }
-  else if(reports)
+
+  if(!checked)
   {
-    const message = !checked ? "Timereports for " + data.startDate : "Timereports for " + data.startDate + " - " + data.endDate;
-    return (
-        <div className="container">
-            <main className="main">
-                <h1 className="title"></h1>
-                <p className="description">{message}</p>
-                <div className="grid">
-                {reports.map((report) => (
-                    <li key={report.name} className="card">
-                    <h2><strong>{report.name}</strong></h2><br/>
-                    Worked hours: {report.hours}              
-                    </li>
-                ))}
-                </div>
-            </main>
+    if(!reports)
+    {
+      return (
+        <>
+                <label>Span
+          <input type="checkbox" checked={checked} onChange={handleChange}></input>
+          </label>
+          
+          <br/>
+          <label htmlFor="startDate">Date</label>
+          <DatePicker
+          dateFormat="yyyy-MM-dd"
+          selected={data.startDate}
+          onChange={(e) => setData({ ...data, startDate: e })}
+          required
+        />
+          <button onClick={submitReport}>Submit</button>
+          </>
+
+    );
+    }
+    
+    else if(reports)
+    {
+      console.log("report2");
+      const message = !checked ? "Timereports for " + newdata.startDate : "Timereports for " + newdata.startDate + " - " + newdata.endDate;
+      return(
+        <>
+        <label>Span
+          <input type="checkbox" checked={checked} onChange={handleChange}></input>
+          </label>
+          <label htmlFor="startDate">Date</label>
+          <DatePicker
+          dateFormat="yyyy-MM-dd"
+          selected={data.startDate}
+          onChange={(e) => setData({ ...data, startDate: e })}
+          required
+          />
+          <button onClick={submitReport}>Submit</button>
+        <p className="description">{message}</p>
+        <div className="grid">
+        {reports.map((report) => (
+            <li key={report.name} className="card">
+            <h2><strong>{report.name}</strong></h2><br/>
+            Worked hours: {report.hours}              
+            </li>
+        ))}
         </div>
-      );
+        </>
+      )
+    }
+    
   }
   
 };
