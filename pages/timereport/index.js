@@ -5,11 +5,14 @@ import styles from "../../styles/Temp.module.css";
 import ReportList from "../../components/ReportList";
 import ReportCreate from "../../components/ReportCreate";
 import Layout from "../../components/Layout";
+import Meta from "../../components/Meta";
+
 
 const Timereport = ({ report }) => {
   return (
     <>
       <Layout>
+        <Meta title='Create report' />
         <ReportCreate />
       </Layout>
       {/* <ReportList report={report}/> */}
