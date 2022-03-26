@@ -6,7 +6,8 @@ import Meta from "../../components/Meta";
 const ProjectList = () => {
   return (    
     <Layout>
-      <Meta title='Projects' />      
+      <Meta title='Projects' keywords='project, active' description='View active projects' 
+      />      
       <ProjectListComponent />
     </Layout>
   );

@@ -12,7 +12,7 @@ const Timereport = ({ report }) => {
   return (
     <>
       <Layout>
-        <Meta title='Create report' />
+        <Meta title='Create report' keywords='create, report, time' description='Create a time report' />
         <ReportCreate />
       </Layout>
       {/* <ReportList report={report}/> */}
