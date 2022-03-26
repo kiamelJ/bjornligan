@@ -1,6 +1,6 @@
 import React from "react";
 import { getCookie } from "cookies-next";
-import styles from "../../styles/Temp.module.css";
+import styles from "../../styles/Form.module.css";
 
 import ReportList from "../../components/ReportList";
 import ReportCreate from "../../components/ReportCreate";
