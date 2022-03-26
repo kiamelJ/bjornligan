@@ -3,7 +3,7 @@ import { getCookie } from "cookies-next";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import styles from "../styles/Temp.module.css";
+import styles from "../styles/Form.module.css";
 
 const ReportCreate = () => {
   const [data, setData] = useState({
@@ -30,7 +30,7 @@ const ReportCreate = () => {
       }
     });
   }
-
+ 
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={submitReport}>
