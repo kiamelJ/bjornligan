@@ -4,7 +4,7 @@ import Meta from "../components/Meta";
 const ProjectList = () => {
   return  (
     <>
-    <Meta title='Login' />
+    <Meta title='Login' keywords='user, login' description='User login page' />
     <LoginComponent />
     </>
   );

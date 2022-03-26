@@ -6,7 +6,7 @@ const UserPage = () => {
   return (
     <>
       <LayoutComponent>
-        <Meta title='Profile' />
+        <Meta title='Profile' keywords='user, about, information' description='Information about a user' />
         <UserPageComponent />
       </LayoutComponent>
     </>
