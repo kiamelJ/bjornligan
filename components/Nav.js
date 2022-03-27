@@ -1,15 +1,27 @@
 import navStyles from "../styles/Nav.module.css";
 import Link from "next/link";
+import { useRouter } from 'next/router'
 
 const Nav = () => {
+  const router = useRouter();
+  const currentRoute = router.pathname;
+
   return (
     <nav className={navStyles.nav}>
       <ul>
         <li>
-          <Link href="/project">Projects</Link>
+          <Link href="/project">
+            <a className={currentRoute === "/project" ? "active" : ""}>
+              Projects
+            </a>
+          </Link>
         </li>
         <li className={navStyles.rightMargin}>
-          <Link href="/userpage">Profile</Link>
+          <Link href="/userpage">
+            <a className={currentRoute === "/userpage" ? "active" : ""}>
+              Profile
+            </a>
+          </Link>
         </li>
         <li>
           <Link href="/">Log out</Link>

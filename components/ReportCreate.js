@@ -70,7 +70,7 @@ const ReportCreate = () => {
           }
           required
         />
-        <button type="submit">Submit</button>
+        <button className={styles.btn} type="submit">Submit</button>
       </form>
     </div>
   );
