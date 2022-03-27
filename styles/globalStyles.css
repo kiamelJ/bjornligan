@@ -4,6 +4,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    background-color: #dde1e7;
 }
 
 a {
@@ -32,6 +33,7 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: rgb(53, 53, 53);
 }
 
 /* DELETE THIS WHEN NEW FOOTER CSS HAVE BEEN TESTED */
@@ -51,28 +53,17 @@ a {
   flex-grow: 1;
 } */
 
-
-
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
-
 .title {
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
+  font-weight: lighter;
 }
 
 .title,
 .description {
   text-align: center;
+  font-weight: lighter
 }
 
 .description {
@@ -97,36 +88,51 @@ a {
   color: inherit;
   text-decoration: none;
   list-style-type: none;
-  border: 1px solid #a09e9efa;
-  border-radius: 10px;
+  border-bottom: 1px solid rgb(63, 143, 6);
   transition: color 0.15s ease, border-color 0.15s ease;
   width: 100vh;
-  
 }
+
 .button-container {
   display: flex;
   width: 100%;
   justify-content: right;
-  
 }
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+
+.card button {
+  border: 0;
+  height: 1.5rem;
+  border-radius: 3px;
+  box-shadow: -3px -3px 7px #ffffff73, 3px 3px 15px rgba(94, 104, 121, .288);
+  color:rgb(63, 143, 6);
+  background-color: #dde1e7;
+}
+
+.card button:hover {
   cursor: pointer;
+  color: rgb(105, 187, 47);
+}
+
+.card button:active {
+  box-shadow: inset -3px -3px 7px #ffffff73, inset 3px 3px 5px rgba(94, 104, 121, .288); 
 }
 
 .card h2 {
   margin: 0 0 0 0;
   font-size: 1rem;
   min-width: 50%;
+  font-weight: 400;
 }
 
 .card p {
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
+}
+
+.active {
+  color: rgb(102, 196, 36);
+  /* text-shadow: 1px 1px 1px; */
 }
 
 /* Mobile friendly layout */
