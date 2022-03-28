@@ -9,41 +9,15 @@ import {Snake} from "./Snake";
 
 function Game() {
 
-  const up = useKeyPress("w");
-  const left = useKeyPress("a");
-  const down = useKeyPress("s");
-  const right = useKeyPress("d");
-
 
   const canvasRef = useRef(null);
-
-  let snake = new Snake(5, 5);
-  let grid = new Grid(300, 300, 30);
-
-  if(up)
-  {
-    snake.moveSnake("w");
-    console.log("up");
-  }
-  if(left)
-  {
-    snake.moveSnake("a");
-    console.log("left");
-  }
-  if(down)
-  {
-    snake.moveSnake("s");
-    console.log("down");
-  }
-  if(right)
-  {
-    snake.moveSnake("d");
-    console.log("right");
-  }
+  let snake = new Snake(5, 5, "cool orm");
+  let grid = new Grid(600, 600, 30);
 
   useInterval(() => {
         snake.updatePos();
-    }, 1000 * 1);
+    }, 100 * 1);
+
 
 
   useEffect(() => {
@@ -54,7 +28,7 @@ function Game() {
 
       grid.draw(ctx);
       snake.drawSnake(ctx);
-
+      snake.moveSnake();
 
       requestAnimationFrame(render);
     }
@@ -64,17 +38,15 @@ function Game() {
   
   
   return (
-    <><canvas
+    <canvas
     id="canvas"
     ref={canvasRef}
-    height="300"
-    width="300"
+    height="600"
+    width="600"
     />
     
 
     
-    </>
-      
 
 
   )

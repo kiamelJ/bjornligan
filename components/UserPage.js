@@ -8,8 +8,6 @@ import Game from "./game/Game"
 import Loader from './Loader'
 
 const UserPage = () => {
-  const [data, setData] = useState(null)
-  const [isLoading, setLoading] = useState(false)
 
   // useEffect(() => {
 
