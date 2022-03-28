@@ -1,3 +1,6 @@
+// KAN RADERAS??
+
+
 import React from "react";
 
 const ReportList = ({ report }) => {
