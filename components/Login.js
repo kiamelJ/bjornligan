@@ -2,8 +2,7 @@ import React from "react";
 import Router from "next/router";
 import { useState, useEffect } from "react";
 import { setCookies, removeCookies } from "cookies-next";
-
-import styles from "../styles/Temp.module.css";
+import styles from "../styles/Form.module.css";
 
 function Login() {
   const [data, setData] = useState({
@@ -70,7 +69,7 @@ function Login() {
           }
           required
         />
-        <button type="submit">Login</button>
+        <button className={styles.btn} type="submit">Login</button>
       </form>
     </div>
   );

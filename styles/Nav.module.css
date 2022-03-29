@@ -1,12 +1,12 @@
 .nav {
   height: 50px;
   padding: 10px;
-  background: #000;
-  color: #fff;
+  background: #dde1e7;
+  color: rgb(63, 143, 6);
   display: flex;
   align-items: center;
   justify-content: flex-start;
-}
+} 
 
 .nav ul {
   display: flex;
@@ -14,11 +14,25 @@
   align-items: center;
   list-style: none;
   width: 100%;
+  padding: 20px;
 }
 
 .nav ul li a {
   margin: 5px 15px;
+  padding: 1px 10px;
+  border-radius: 3px;
+  box-shadow: -3px -3px 7px #ffffff73, 3px 3px 15px rgba(94, 104, 121, .288);
 }
+
+.nav ul li a:active {
+  box-shadow: inset -3px -3px 7px #ffffff73, inset 3px 3px 5px rgba(94, 104, 121, .288); 
+}
+
+.nav ul li a:hover {
+  color: rgb(95, 189, 28);
+  /* text-shadow: 1px 1px 1px; */ 
+}
+
 .rightMargin {
   margin-right: auto;
   

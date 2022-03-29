@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   background-color: #b8b8b8;
-  background-image: linear-gradient(160deg, #c7c7c7 0%, #b8b8b8 100%);
+  background-image: linear-gradient(160deg, #dde1e7 0%, rgb(106, 160, 68) 150%);
 }
 .form {
   background: white;
@@ -13,9 +13,7 @@
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 600px;
 }
-.title {
-  margin: 0 0 1.5rem;
-}
+
 .form label {
   display: block;
   text-transform: uppercase;
@@ -50,14 +48,19 @@
   margin-right: 1rem;
 }
 .btn {
-  background-color: #0093e9;
-  background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
-  padding: 0.5rem 1rem;
-  border: none;
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 4px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  border: 0;
+  height: 1.5rem;
+  border-radius: 3px;
+  box-shadow: -3px -3px 7px #ffffff73, 3px 3px 15px rgba(94, 104, 121, .288);
+  color:rgb(63, 143, 6);
+  background-color: #dde1e7;
+} 
+
+.btn:hover {
   cursor: pointer;
+  color: rgb(105, 187, 47);
+}
+
+.btn:active {
+  box-shadow: inset -3px -3px 7px #ffffff73, inset 3px 3px 5px rgba(94, 104, 121, .288); 
 }
