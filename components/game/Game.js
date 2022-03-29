@@ -37,7 +37,6 @@ function Game() {
         ctx.font = "100px Arial";
         ctx.fillText("Död", canvas.width/2, canvas.height - 50)
       }
-      
 
       grid.draw(ctx);
       snake.drawSnake(ctx);

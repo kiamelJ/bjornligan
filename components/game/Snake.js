@@ -42,7 +42,6 @@ export class Snake {
 
         if(this.key == "w")
         {
-            console.log("w");
             this.currentDirection = 0;
         }
         if(this.key == "a")
@@ -88,7 +87,6 @@ export class Snake {
             {
                 this.food.x = Math.floor(Math.random()*29) + 1;
                 this.food.y = Math.floor(Math.random()*29) + 1; 
-                console.log("new food x: ", this.food.x, " y: ", this.food.y);
                 this.points++;
             }
             else{
@@ -102,7 +100,6 @@ export class Snake {
             {
                 this.food.x = Math.floor(Math.random()*29) + 1;
                 this.food.y = Math.floor(Math.random()*29) + 1; 
-                console.log("new food x: ", this.food.x, " y: ", this.food.y);
                 this.points++;
             }
             else{
@@ -116,7 +113,6 @@ export class Snake {
             {
                 this.food.x = Math.floor(Math.random()*29) + 1;
                 this.food.y = Math.floor(Math.random()*29) + 1; 
-                console.log("new food x: ", this.food.x, " y: ", this.food.y);
                 this.points++;
             }
             else{
@@ -130,7 +126,6 @@ export class Snake {
             {
                 this.food.x = Math.floor(Math.random()*29) + 1;
                 this.food.y = Math.floor(Math.random()*29) + 1; 
-                console.log("new food x: ", this.food.x, " y: ", this.food.y);
                 this.points++;
             }
             else{
