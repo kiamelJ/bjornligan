@@ -1,4 +1,4 @@
-import UserPageComponent from "../../components/Userpage";
+import UserPageComponent from "../../components/UserPage";
 import LayoutComponent from "../../components/Layout";
 import Meta from "../../components/Meta";
 
