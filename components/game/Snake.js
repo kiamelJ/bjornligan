@@ -1,7 +1,5 @@
 
 
-import { useKeyPress } from "./hooks/movement";
-
 export class Snake {
     constructor(startX, startY, id){
         console.log("constructor");

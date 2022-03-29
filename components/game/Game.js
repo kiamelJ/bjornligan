@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 
-import { useKeyPress } from "./hooks/movement";
 
 import {Grid} from "./Grid"
 import {Snake} from "./Snake";
