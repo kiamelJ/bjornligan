@@ -4,6 +4,7 @@ import en from "date-fns/locale/en-GB"; // the locale you want
 registerLocale("en-GB", en);
 import "react-datepicker/dist/react-datepicker.css";
 import style from './../styles/Summary.module.css'
+import Loader from "./Loader";
 
 //TODO Välja projekt så vi får projektID och så vi kan skicka det till API idRequest
 //TODO ProjektID state
@@ -21,6 +22,8 @@ const ProjectSummary = ({ project }) => {
     endDate: new Date(),
     projectId: "",
   });
+
+  const [isLoading, setLoading] = useState(false);
   
 
   const [result, setResult] = useState(null);
@@ -29,6 +32,7 @@ const ProjectSummary = ({ project }) => {
     event.preventDefault();
 
     console.log("input: ", data);
+    setLoading(true);
 
     newData.startDate = new Intl.DateTimeFormat("sv-SV").format(data.startDate);
     newData.endDate = new Intl.DateTimeFormat("sv-SV").format(data.endDate);
@@ -44,12 +48,20 @@ const ProjectSummary = ({ project }) => {
       body: JSON.stringify(newData),
     })
       .then((res) => res.json())
-      .then((res) => setResult(res))
-      .then(console.log("result:", result));
+      .then((res) => {
+        setResult(res);
+        setLoading(false)});
+  }
+    
+  if(isLoading == true)
+  {
+    return(
+      <Loader />
+
+    )
   }
 
-
-    if(result == null)
+    else if(isLoading == false && result == null)
     {
       return (
         <div className={style.container}>
@@ -101,9 +113,8 @@ const ProjectSummary = ({ project }) => {
         </div>
       );
     }
-    else
+    else if(isLoading == false && result != null)
     {
-      
       console.log("report1");
       const message = "Timereports for " + newData.startDate + " - " + newData.endDate;
       return (

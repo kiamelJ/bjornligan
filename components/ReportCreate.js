@@ -24,11 +24,12 @@ const ReportCreate = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    }).then((response) => {
+    }).then((response, data) => {
       if (response.ok) {
         alert("Your report has been submitted");
+        window.location.reload(true);
       }
-    });
+    })
   }
  
   return (
