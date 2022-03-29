@@ -4,6 +4,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import en from "date-fns/locale/en-GB"; // the locale you want
 registerLocale("en-GB", en);
 import Loader from "./Loader"
+import style from './../styles/Summary.module.css'
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -64,73 +65,90 @@ const ReportCreate = () => {
     if(!reports)
     {
       return (
-        <>
-        <label>Span
-          <input type="checkbox" checked={checked} onChange={handleChange}></input>
-          </label>
-          
-          <br/>
-          <label htmlFor="startDate">Start Date</label>
-          <DatePicker
-          dateFormat="yyyy-MM-dd"
-          selected={data.startDate}
-          onChange={(e) => setData({ ...data, startDate: e })}
-          required
-          locale="en-GB"
-        />
-          <label htmlFor="endDate">End Date</label>
-          <DatePicker
-          dateFormat="yyyy-MM-dd"
-          selected={data.endDate}
-          onChange={(e) => setData({ ...data, endDate: e })}
-          required
-          locale="en-GB"
-          />
-          <button onClick={submitReport}>Submit</button>
-          </>
-    );
+        <div className={style.container}>
+          <div className={style.main}>
+            <label>
+              Span
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={handleChange}
+              ></input>
+            </label>
+            <br />
+            <br />
+            <label htmlFor="startDate">Start Date</label>
+            <DatePicker
+              dateFormat="yyyy-MM-dd"
+              selected={data.startDate}
+              onChange={(e) => setData({ ...data, startDate: e })}
+              required
+              locale="en-GB"
+            />
+            <label htmlFor="endDate">End Date</label>
+            <DatePicker
+              dateFormat="yyyy-MM-dd"
+              selected={data.endDate}
+              onChange={(e) => setData({ ...data, endDate: e })}
+              required
+              locale="en-GB"
+            />
+            <button onClick={submitReport}>Submit</button>
+          </div>
+        </div>
+      );
     }
     else if(reports)
     {
       
       console.log("report1");
       const message = !checked ? "Timereports for " + newdata.startDate : "Timereports for " + newdata.startDate + " - " + newdata.endDate;
-      return(
-        <>
-          <label>Span
-          <input type="checkbox" checked={checked} onChange={handleChange}></input>
-          </label>
-          
-          <br/>
-          <label htmlFor="startDate">Start Date</label>
-          <DatePicker
-          dateFormat="yyyy-MM-dd"
-          selected={data.startDate}
-          onChange={(e) => setData({ ...data, startDate: e })}
-          required
-          locale="en-GB"
-        />
-          <label htmlFor="endDate">End Date</label>
-          <DatePicker
-          dateFormat="yyyy-MM-dd"
-          selected={data.endDate}
-          onChange={(e) => setData({ ...data, endDate: e })}
-          required
-          locale="en-GB"
-          />
-          <button onClick={submitReport}>Submit</button>
-       
-        <p className="description">{message}</p>
-        <div className="grid">
-        {reports.map((report) => (
-            <li key={report.name} className="card">
-            <h2><strong>{report.name}</strong></h2><br/>
-            Worked hours: {report.hours}              
-            </li>
-        ))}
+      return (
+        <div className={style.container}>
+          <div className={style.main}>
+            <label>
+              Span
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={handleChange}
+              ></input>
+            </label>
+            <br />
+            <br />
+            <label htmlFor="startDate">Start Date</label>
+            <DatePicker
+              dateFormat="yyyy-MM-dd"
+              selected={data.startDate}
+              onChange={(e) => setData({ ...data, startDate: e })}
+              required
+              locale="en-GB"
+            />
+            <label htmlFor="endDate">End Date</label>
+            <DatePicker
+              dateFormat="yyyy-MM-dd"
+              selected={data.endDate}
+              onChange={(e) => setData({ ...data, endDate: e })}
+              required
+              locale="en-GB"
+            />
+            <button onClick={submitReport}>Submit</button>
+
+            <p className="description">{message}</p>
+            <div className="grid">
+              {reports.map((report) => (
+                <li key={report.name} className="card">
+                  <h2>
+                    <strong>{report.name}</strong>
+                  </h2>
+                  <br />
+                  Worked hours: {report.hours}
+                </li>
+              ))}
+            </div>
+          </div>
         </div>
-        </>
-      )
+      );
     }
   }
 
@@ -139,59 +157,75 @@ const ReportCreate = () => {
     if(!reports)
     {
       return (
-        <>
-                <label>Span
-          <input type="checkbox" checked={checked} onChange={handleChange}></input>
-          </label>
-          
-          <br/>
-          <label htmlFor="startDate">Date</label>
-          <DatePicker
-          dateFormat="yyyy-MM-dd"
-          selected={data.startDate}
-          onChange={(e) => setData({ ...data, startDate: e })}
-          required
-          locale="en-GB"
-        />
-          <button onClick={submitReport}>Submit</button>
-          </>
-
-    );
+        <div className={style.container}>
+          <div className={style.main}>
+            <label>
+              Span
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={handleChange}
+              ></input>
+            </label>
+            <br />
+            <br />
+            <label htmlFor="startDate">Date</label>
+            <DatePicker
+              dateFormat="yyyy-MM-dd"
+              selected={data.startDate}
+              onChange={(e) => setData({ ...data, startDate: e })}
+              required
+              locale="en-GB"
+            />
+            <button onClick={submitReport}>Submit</button>
+          </div>
+        </div>
+      );
     }
     
     else if(reports)
     {
       console.log("report2");
       const message = !checked ? "Timereports for " + newdata.startDate : "Timereports for " + newdata.startDate + " - " + newdata.endDate;
-      return(
-        <>
-        <label>Span
-          <input type="checkbox" checked={checked} onChange={handleChange}></input>
-          </label>
-          <label htmlFor="startDate">Date</label>
-          <DatePicker
-          dateFormat="yyyy-MM-dd"
-          selected={data.startDate}
-          onChange={(e) => setData({ ...data, startDate: e })}
-          required
-          locale="en-GB"
-          />
-          <button onClick={submitReport}>Submit</button>
-        <p className="description">{message}</p>
-        <div className="grid">
-        {reports.map((report) => (
-            <li key={report.name} className="card">
-            <h2><strong>{report.name}</strong></h2><br/>
-            Worked hours: {report.hours}              
-            </li>
-        ))}
+      return (
+        <div className={style.container}>
+          <div className={style.main}>
+            <label>
+              Span
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={handleChange}
+              ></input>
+            </label>
+            <br />
+            <br />
+            <label htmlFor="startDate">Date</label>
+            <DatePicker
+              dateFormat="yyyy-MM-dd"
+              selected={data.startDate}
+              onChange={(e) => setData({ ...data, startDate: e })}
+              required
+              locale="en-GB"
+            />
+            <button onClick={submitReport}>Submit</button>
+            <p className="description">{message}</p>
+            <div className="grid">
+              {reports.map((report) => (
+                <li key={report.name} className="card">
+                  <h2>
+                    <strong>{report.name}</strong>
+                  </h2>
+                  <br />
+                  Worked hours: {report.hours}
+                </li>
+              ))}
+            </div>
+          </div>
         </div>
-        </>
-      )
-    }
-    
-  }
-  
+      );
+    }   
+  }  
 };
 
 export default ReportCreate;

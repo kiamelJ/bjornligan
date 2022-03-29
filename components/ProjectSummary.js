@@ -3,6 +3,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import en from "date-fns/locale/en-GB"; // the locale you want
 registerLocale("en-GB", en);
 import "react-datepicker/dist/react-datepicker.css";
+import style from './../styles/Summary.module.css'
 
 //TODO Välja projekt så vi får projektID och så vi kan skicka det till API idRequest
 //TODO ProjektID state
@@ -51,102 +52,114 @@ const ProjectSummary = ({ project }) => {
     if(result == null)
     {
       return (
-        <>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor='project'>Project</label>
-            <select
-              value={data.projectId}
-              onChange={(e) => setData({ ...data, projectId: e.target.value })}
-              required
-            >
-              <option value='' disabled hidden>
-                Please Choose...
-              </option>
-              {project.map((project) => (
-                <option
-                  key={project.id}
-                  id={project.id}
-                  value={project.id}
-                  // selected={data.projectId}
-                >
-                  {project.properties.Projectname.title[0].plain_text}
+        <div className={style.container}>
+          <div className={style.main}>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="project"></label>
+              <select
+                value={data.projectId}
+                onChange={(e) =>
+                  setData({ ...data, projectId: e.target.value })
+                }
+                required
+              >
+                <option value="" disabled hidden>
+                  Choose Project...
                 </option>
-              ))}
-            </select><br/>
-          <label htmlFor="startDate">Start Date</label>
-          <DatePicker
-          dateFormat="yyyy-MM-dd"
-          selected={data.startDate}
-          onChange={(e) => setData({ ...data, startDate: e })}
-          required
-          locale="en-GB"
-        />
-          <label htmlFor="endDate">End Date</label>
-          <DatePicker
-          dateFormat="yyyy-MM-dd"
-          selected={data.endDate}
-          onChange={(e) => setData({ ...data, endDate: e })}
-          required
-          locale="en-GB"
-          />
-          <button type="submit">Search</button>
-          </form>
-          </>
-    );
+                {project.map((project) => (
+                  <option
+                    key={project.id}
+                    id={project.id}
+                    value={project.id}
+                    // selected={data.projectId}
+                  >
+                    {project.properties.Projectname.title[0].plain_text}
+                  </option>
+                ))}
+              </select>
+              <br />
+              <br />
+              <label htmlFor="startDate">Start Date</label>
+              <DatePicker
+                dateFormat="yyyy-MM-dd"
+                selected={data.startDate}
+                onChange={(e) => setData({ ...data, startDate: e })}
+                required
+                locale="en-GB"
+              />
+              <label htmlFor="endDate">End Date</label>
+              <DatePicker
+                dateFormat="yyyy-MM-dd"
+                selected={data.endDate}
+                onChange={(e) => setData({ ...data, endDate: e })}
+                required
+                locale="en-GB"
+              />
+              <button type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      );
     }
     else
     {
       
       console.log("report1");
       const message = "Timereports for " + newData.startDate + " - " + newData.endDate;
-      return(
-        <>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor='project'>Project</label>
-            <select
-              value={data.projectId}
-              onChange={(e) => setData({ ...data, projectId: e.target.value })}
-              required
-            >
-              <option value='' disabled hidden>
-                Please Choose...
-              </option>
-              {project.map((project) => (
-                <option
-                  key={project.id}
-                  id={project.id}
-                  value={project.id}
-                  // selected={data.projectId}
-                >
-                  {project.properties.Projectname.title[0].plain_text}
+      return (
+        <div className={style.container}>
+          <div className={style.main}>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="project"></label>
+              <select
+                value={data.projectId}
+                onChange={(e) =>
+                  setData({ ...data, projectId: e.target.value })
+                }
+                required
+              >
+                <option value="" disabled hidden>
+                  Please Choose...
                 </option>
-              ))}
-            </select>
-          <label htmlFor="startDate">Start Date</label>
-          <DatePicker
-          dateFormat="yyyy-MM-dd"
-          selected={data.startDate}
-          onChange={(e) => setData({ ...data, startDate: e })}
-          required
-          locale="en-GB"
-        />
-          <label htmlFor="endDate">End Date</label>
-          <DatePicker
-          dateFormat="yyyy-MM-dd"
-          selected={data.endDate}
-          onChange={(e) => setData({ ...data, endDate: e })}
-          required
-          locale="en-GB"
-          />
-          <button type="submit">Search</button>
-        </form>
-       
-        <p className="description">{message}</p>
-        <div className="grid">
-        Total hours for this project:&nbsp;<strong> {result}</strong>
+                {project.map((project) => (
+                  <option
+                    key={project.id}
+                    id={project.id}
+                    value={project.id}
+                    // selected={data.projectId}
+                  >
+                    {project.properties.Projectname.title[0].plain_text}
+                  </option>
+                ))}
+              </select>
+              <br />
+              <br />
+              <label htmlFor="startDate">Start Date</label>
+              <DatePicker
+                dateFormat="yyyy-MM-dd"
+                selected={data.startDate}
+                onChange={(e) => setData({ ...data, startDate: e })}
+                required
+                locale="en-GB"
+              />
+              <label htmlFor="endDate">End Date</label>
+              <DatePicker
+                dateFormat="yyyy-MM-dd"
+                selected={data.endDate}
+                onChange={(e) => setData({ ...data, endDate: e })}
+                required
+                locale="en-GB"
+              />
+              <button type="submit">Search</button>
+            </form>
+
+            <p className="description">{message}</p>
+            <div className="grid">
+              Total hours for this project:&nbsp;<strong> {result}</strong>
+            </div>
+          </div>
         </div>
-        </>
-      )
+      );
     }
 };
 
