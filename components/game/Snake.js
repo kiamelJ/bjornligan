@@ -14,7 +14,9 @@ export class Snake {
         this.id = id;
         this.keyDown = false;
         this.key = "a";
-        this.food = new Food(Math.floor(Math.random()*19) + 1, Math.floor(Math.random()*19) + 1)
+        this.food = new Food(Math.floor(Math.random()*29) + 1, Math.floor(Math.random()*29) + 1)
+        this.points = 0;
+        this.death = false;
     }
 
 
@@ -25,9 +27,6 @@ export class Snake {
         }
         this.food.draw(ctx);
     }
-    
-
-
       
 
     moveSnake(){
@@ -58,6 +57,27 @@ export class Snake {
         {
             this.currentDirection = 3;
         }
+        if(this.death && this.key == "e")
+        {
+            this.points = 0;
+            this.fullSnake = [];
+            this.fullSnake.push(new SnakePart(15, 15));
+            
+            this.headX = 15;
+            this.headY = 15;
+            this.death = false;
+        }
+
+    }
+
+    checkCollision(){
+        for(let i = 1; i < this.fullSnake.length; i++)
+        {
+            if(this.headX == this.fullSnake[i].x && this.headY == this.fullSnake[i].y)
+            {
+                this.death = true;
+            }
+        }
     }
 
     updatePos(){
@@ -66,9 +86,10 @@ export class Snake {
             this.fullSnake.unshift(new SnakePart(this.headX, this.headY))
             if(this.headX == this.food.x && this.headY == this.food.y)
             {
-                this.food.x = Math.floor(Math.random()*19) + 1;
-                this.food.y = Math.floor(Math.random()*19) + 1; 
+                this.food.x = Math.floor(Math.random()*29) + 1;
+                this.food.y = Math.floor(Math.random()*29) + 1; 
                 console.log("new food x: ", this.food.x, " y: ", this.food.y);
+                this.points++;
             }
             else{
                 this.fullSnake.pop();
@@ -79,9 +100,10 @@ export class Snake {
             this.fullSnake.unshift(new SnakePart(this.headX, this.headY))
             if(this.headX == this.food.x && this.headY == this.food.y)
             {
-                this.food.x = Math.floor(Math.random()*19) + 1;
-                this.food.y = Math.floor(Math.random()*19) + 1; 
+                this.food.x = Math.floor(Math.random()*29) + 1;
+                this.food.y = Math.floor(Math.random()*29) + 1; 
                 console.log("new food x: ", this.food.x, " y: ", this.food.y);
+                this.points++;
             }
             else{
                 this.fullSnake.pop();
@@ -92,9 +114,10 @@ export class Snake {
             this.fullSnake.unshift(new SnakePart(this.headX, this.headY))
             if(this.headX == this.food.x && this.headY == this.food.y)
             {
-                this.food.x = Math.floor(Math.random()*19) + 1;
-                this.food.y = Math.floor(Math.random()*19) + 1; 
+                this.food.x = Math.floor(Math.random()*29) + 1;
+                this.food.y = Math.floor(Math.random()*29) + 1; 
                 console.log("new food x: ", this.food.x, " y: ", this.food.y);
+                this.points++;
             }
             else{
                 this.fullSnake.pop();
@@ -105,18 +128,19 @@ export class Snake {
             this.fullSnake.unshift(new SnakePart(this.headX, this.headY))
             if(this.headX == this.food.x && this.headY == this.food.y)
             {
-                this.food.x = Math.floor(Math.random()*19) + 1;
-                this.food.y = Math.floor(Math.random()*19) + 1; 
+                this.food.x = Math.floor(Math.random()*29) + 1;
+                this.food.y = Math.floor(Math.random()*29) + 1; 
                 console.log("new food x: ", this.food.x, " y: ", this.food.y);
+                this.points++;
             }
             else{
                 this.fullSnake.pop();
             }
         }
 
-        if(this.headX < 0 || this.headY < 0 || this.headX > 19 || this.headY > 19)
+        if(this.headX < 0 || this.headY < 0 || this.headX > 29 || this.headY > 29)
         {
-            console.log("du dör");
+            this.death = true;
         }
 
     }
@@ -130,7 +154,7 @@ class Food {
     }
     draw(ctx){
         ctx.beginPath();
-        ctx.rect(this.x * 30, this.y * 30, 30, 30);
+        ctx.rect(this.x * 15, this.y * 15, 15, 15);
         ctx.fillStyle = "red";
         ctx.fill();
         ctx.stroke();
@@ -148,7 +172,7 @@ class SnakePart {
 
     draw(ctx){
         ctx.beginPath();
-        ctx.rect(this.x * 30, this.y * 30, 30, 30);
+        ctx.rect(this.x * 15, this.y * 15, 15, 15);
         ctx.fillStyle = "black";
         ctx.fill();
         ctx.stroke();

@@ -11,11 +11,14 @@ function Game() {
 
 
   const canvasRef = useRef(null);
-  let snake = new Snake(5, 5, "cool orm");
-  let grid = new Grid(600, 600, 30);
+  let snake = new Snake(15, 15, "cool orm");
+  let grid = new Grid(450, 450, 15);
 
   useInterval(() => {
+      if(!snake.death)
+      {
         snake.updatePos();
+      }
     }, 100 * 1);
 
 
@@ -24,11 +27,23 @@ function Game() {
     const render = () => {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext("2d");
+      ctx.font = "30px Arial";
+      ctx.textAlign = "center";
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillText("Points: " + snake.points, canvas.width/2, (canvas.height - 25));
+      snake.checkCollision();
+      if(snake.death)
+      {
+        ctx.font = "100px Arial";
+        ctx.fillText("Död", canvas.width/2, canvas.height - 50)
+      }
+      
 
       grid.draw(ctx);
       snake.drawSnake(ctx);
       snake.moveSnake();
+
+
 
       requestAnimationFrame(render);
     }
@@ -42,7 +57,7 @@ function Game() {
     id="canvas"
     ref={canvasRef}
     height="600"
-    width="600"
+    width="450"
     />
     
 
