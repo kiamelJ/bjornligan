@@ -12,33 +12,33 @@ const Nav = () => {
       <ul>
         <li>
           <Link href="/project">
-            <a className={currentRoute === "/project" ? "active" : ""}>
+            <a className={currentRoute === "/project" ? "active" : "inActive"}>
               Projects
             </a>
           </Link>
         </li>
         <li>
           <Link href="/timereport/reportsummary">
-              <a className={currentRoute === "/timereport/project" ? "active" : ""}>
+              <a className={currentRoute === "/timereport/reportsummary" ? "active" : "inActive"}>
                 Report Summary
               </a>
             </Link>
         </li>
         <li>
           <Link href="/project/projectsummary">
-              <a className={currentRoute === "/project/projectsummary" ? "active" : ""}>
+              <a className={currentRoute === "/project/projectsummary" ? "active" : "inActive"}>
                 Project Summary
               </a>
             </Link>
         </li>
         <li className={navStyles.rightMargin}>
           <Link href="/userpage">
-            <a className={currentRoute === "/userpage" ? "active" : ""}>
+            <a className={currentRoute === "/userpage" ? "active" : "inActive"}>
               Profile
             </a>
           </Link>
         </li>
-        <li>
+        <li className={navStyles.userName}>
           {getCookie("Name")}
         </li>
         <li>
