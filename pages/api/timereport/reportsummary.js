@@ -34,9 +34,6 @@ export default async function handler(req, res) {
                   },
                 },  
           });
-
-
-
         
         for(let i = 0; i < response.results.length; i++)
         {

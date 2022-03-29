@@ -1,13 +1,12 @@
 import React from "react";
-import { getCookie } from "cookies-next";
 import { useState } from "react";
-import DatePicker from "react-datepicker";
-import { registerLocale, setDefaultLocale } from  "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
+import en from "date-fns/locale/en-GB"; // the locale you want
+registerLocale("en-GB", en);
 import Loader from "./Loader"
 
 import "react-datepicker/dist/react-datepicker.css";
 
-import { isoParse } from 'date-fns'
 
 const ReportCreate = () => {
   const [data, setData] = useState({
@@ -77,6 +76,7 @@ const ReportCreate = () => {
           selected={data.startDate}
           onChange={(e) => setData({ ...data, startDate: e })}
           required
+          locale="en-GB"
         />
           <label htmlFor="endDate">End Date</label>
           <DatePicker
@@ -84,6 +84,7 @@ const ReportCreate = () => {
           selected={data.endDate}
           onChange={(e) => setData({ ...data, endDate: e })}
           required
+          locale="en-GB"
           />
           <button onClick={submitReport}>Submit</button>
           </>
@@ -107,6 +108,7 @@ const ReportCreate = () => {
           selected={data.startDate}
           onChange={(e) => setData({ ...data, startDate: e })}
           required
+          locale="en-GB"
         />
           <label htmlFor="endDate">End Date</label>
           <DatePicker
@@ -114,6 +116,7 @@ const ReportCreate = () => {
           selected={data.endDate}
           onChange={(e) => setData({ ...data, endDate: e })}
           required
+          locale="en-GB"
           />
           <button onClick={submitReport}>Submit</button>
        
@@ -148,6 +151,7 @@ const ReportCreate = () => {
           selected={data.startDate}
           onChange={(e) => setData({ ...data, startDate: e })}
           required
+          locale="en-GB"
         />
           <button onClick={submitReport}>Submit</button>
           </>
@@ -170,6 +174,7 @@ const ReportCreate = () => {
           selected={data.startDate}
           onChange={(e) => setData({ ...data, startDate: e })}
           required
+          locale="en-GB"
           />
           <button onClick={submitReport}>Submit</button>
         <p className="description">{message}</p>

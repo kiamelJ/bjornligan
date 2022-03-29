@@ -1,6 +1,7 @@
 import navStyles from "../styles/Nav.module.css";
 import Link from "next/link";
 import { useRouter } from 'next/router'
+import { getCookie } from 'cookies-next'
 
 const Nav = () => {
   const router = useRouter();
@@ -23,12 +24,22 @@ const Nav = () => {
               </a>
             </Link>
         </li>
+        <li>
+          <Link href="/project/projectsummary">
+              <a className={currentRoute === "/project/projectsummary" ? "active" : ""}>
+                Project Summary
+              </a>
+            </Link>
+        </li>
         <li className={navStyles.rightMargin}>
           <Link href="/userpage">
             <a className={currentRoute === "/userpage" ? "active" : ""}>
               Profile
             </a>
           </Link>
+        </li>
+        <li>
+          {getCookie("Name")}
         </li>
         <li>
           <Link href="/">Log out</Link>
