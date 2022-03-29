@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-DatePicker";
+import ReportResult from "./ReportResult";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../styles/Temp.module.css";
 
@@ -13,10 +14,15 @@ const ReportFilter = ({ project }) => {
     dateTo: new Date(),
     projectId: "",
   });
-  const [result, setResult] = useState();
+  const [result, setResult] = useState([]);
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    // data.dateFrom = new Intl.DateTimeFormat("sv-SV").format(data.dateFrom);
+    // data.dateTo = new Intl.DateTimeFormat("sv-SV").format(data.dateTo);
+
+    console.log("DATA:", data);
     await fetch("../api/test", {
       method: "POST",
       headers: {
@@ -26,7 +32,7 @@ const ReportFilter = ({ project }) => {
     })
       .then((res) => res.json())
       .then((res) => setResult(res))
-      .then(console.log(result));
+      .then(console.log("result:", result));
   }
 
   return (
@@ -35,23 +41,32 @@ const ReportFilter = ({ project }) => {
         <main className='main'>
           <h1 className='title'>Report summary</h1>
           <p className='description'>
-            Se rapporterad tid per project och vecka <br />
-            så jag vet hur mycket tid vi har lagt ner t.ex. senaste veckan
+            Se rapporterad tid per project och vecka så jag vet hur mycket tid
+            vi har lagt ner t.ex. senaste veckan
           </p>
-          <div></div>
+
           <form onSubmit={handleSubmit}>
-            <select>
+            <label htmlFor='project'>Project</label>
+            <select
+              value={data.projectId}
+              onChange={(e) => setData({ ...data, projectId: e.target.value })}
+              required
+            >
+              <option value='' disabled hidden>
+                Please Choose...
+              </option>
               {project.map((project) => (
                 <option
                   key={project.id}
                   id={project.id}
-                  selected={data.projectId}
-                  onchange={(e) => setData({ ...data, projectId: e })}
+                  value={project.id}
+                  // selected={data.projectId}
                 >
                   {project.properties.Projectname.title[0].plain_text}
                 </option>
               ))}
             </select>
+
             <label htmlFor='date'>Date From</label>
             <DatePicker
               dateFormat='yyyy-MM-dd'
@@ -69,7 +84,10 @@ const ReportFilter = ({ project }) => {
             />
             <button type='submit'>Submit</button>
           </form>
-          <div className='grid'> {/* här ska det Mappas ut*/}</div>
+
+          <div className='grid'>
+            <ReportResult reports={result} />
+          </div>
         </main>
       </div>
     </>

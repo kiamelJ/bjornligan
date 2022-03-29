@@ -23,24 +23,24 @@ export default async function handler(request, res) {
           {
             property: "Date",
             date: {
-              on_or_after: "2022-02-07",
+              on_or_after: request.body.dateFrom,
             },
           },
           {
             property: "Date",
             date: {
-              on_or_before: "2022-02-11",
+              on_or_before: request.body.dateTo,
             },
           },
           {
             property: "Project",
-            relation: { contains: "a404d585c7504640a49cbda90e367de7" },
+            relation: { contains: request.body.projectId },
           },
         ],
       },
     });
 
-    // console.log("response, timereport added: ", response);
-    res.status(200).json({ response });
+    console.log("result: ", response.results);
+    res.status(200).json(response.results);
   }
 }
