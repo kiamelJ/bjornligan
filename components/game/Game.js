@@ -22,11 +22,11 @@ function Game() {
     }, 100 * 1);
 
 
-
   useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
     const render = () => {
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d");
       ctx.font = "30px Arial";
       ctx.textAlign = "center";
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -42,9 +42,6 @@ function Game() {
       grid.draw(ctx);
       snake.drawSnake(ctx);
       snake.moveSnake();
-
-
-
       requestAnimationFrame(render);
     }
     render();
