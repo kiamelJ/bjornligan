@@ -29,6 +29,7 @@ function Login() {
       .then((result) => {
         console.log(result);
         setCookies("User", result.results[0].id);
+        setCookies("Name", result.results[0].properties.Name.title[0].plain_text);
         Router.push("./project");
       })
       .catch((error) => {

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import DatePicker from "react-DatePicker";
+import DatePicker, { registerLocale } from "react-datepicker";
+import en from "date-fns/locale/en-GB"; // the locale you want
+registerLocale("en-GB", en);
 import "react-datepicker/dist/react-datepicker.css";
 
 //TODO Välja projekt så vi får projektID och så vi kan skicka det till API idRequest
@@ -77,6 +79,7 @@ const ProjectSummary = ({ project }) => {
           selected={data.startDate}
           onChange={(e) => setData({ ...data, startDate: e })}
           required
+          locale="en-GB"
         />
           <label htmlFor="endDate">End Date</label>
           <DatePicker
@@ -84,6 +87,7 @@ const ProjectSummary = ({ project }) => {
           selected={data.endDate}
           onChange={(e) => setData({ ...data, endDate: e })}
           required
+          locale="en-GB"
           />
           <button type="submit">Search</button>
           </form>
@@ -124,6 +128,7 @@ const ProjectSummary = ({ project }) => {
           selected={data.startDate}
           onChange={(e) => setData({ ...data, startDate: e })}
           required
+          locale="en-GB"
         />
           <label htmlFor="endDate">End Date</label>
           <DatePicker
@@ -131,6 +136,7 @@ const ProjectSummary = ({ project }) => {
           selected={data.endDate}
           onChange={(e) => setData({ ...data, endDate: e })}
           required
+          locale="en-GB"
           />
           <button type="submit">Search</button>
         </form>

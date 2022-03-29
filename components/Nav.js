@@ -1,6 +1,7 @@
 import navStyles from "../styles/Nav.module.css";
 import Link from "next/link";
 import { useRouter } from 'next/router'
+import { getCookie } from 'cookies-next'
 
 const Nav = () => {
   const router = useRouter();
@@ -36,6 +37,9 @@ const Nav = () => {
               Profile
             </a>
           </Link>
+        </li>
+        <li>
+          {getCookie("Name")}
         </li>
         <li>
           <Link href="/">Log out</Link>
