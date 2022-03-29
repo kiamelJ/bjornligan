@@ -21,8 +21,7 @@
 .nav ul li a {
   margin: 5px 15px;
   padding: 1px 10px;
-  border-radius: 3px;
-  box-shadow: -3px -3px 7px #ffffff73, 3px 3px 15px rgba(94, 104, 121, 0.288);
+  border-radius: 4px; 
 }
 
 .nav ul li a:active {
@@ -35,6 +34,13 @@
   /* text-shadow: 1px 1px 1px; */
 }
 
+.userName {
+  font-style: italic;
+  color: rgb(53, 53, 53);
+  padding: 0px 0px 0px 50px
+  /* PADDING MESSES WITH MOBILE NAVBAR :( */
+}
+
 /* .rightMargin {
           margin-right: auto;
 } */
@@ -45,4 +51,11 @@
     flex-direction: column;
     gap: 25px;
   }
+
+  .userName {
+    font-style: italic;
+    color: rgb(53, 53, 53);
+    padding: 0px 0px 0px 0px;
+  }
+  
 }
