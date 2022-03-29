@@ -16,6 +16,13 @@ const Nav = () => {
             </a>
           </Link>
         </li>
+        <li>
+          <Link href="/timereport/reportsummary">
+              <a className={currentRoute === "/timereport/project" ? "active" : ""}>
+                Report Summary
+              </a>
+            </Link>
+        </li>
         <li className={navStyles.rightMargin}>
           <Link href="/userpage">
             <a className={currentRoute === "/userpage" ? "active" : ""}>
