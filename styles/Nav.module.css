@@ -21,7 +21,7 @@
 .nav ul li a {
   margin: 5px 15px;
   padding: 1px 10px;
-  border-radius: 4px; 
+  border-radius: 4px;
 }
 
 .nav ul li a:active {
@@ -37,7 +37,7 @@
 .userName {
   font-style: italic;
   color: rgb(53, 53, 53);
-  padding: 0px 0px 0px 50px
+  padding: 0px 0px 0px 50px;
   /* PADDING MESSES WITH MOBILE NAVBAR :( */
 }
 
@@ -57,5 +57,4 @@
     color: rgb(53, 53, 53);
     padding: 0px 0px 0px 0px;
   }
-  
 }
