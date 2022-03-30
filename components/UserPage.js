@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { getCookie } from "cookies-next";
-
+import styles from './../styles/ProfilePage.module.css'
 import Loader from "./Loader";
 
 const UserPage = () => {
@@ -29,18 +29,31 @@ const UserPage = () => {
   if (!data) return <h1>no data</h1>;
 
   return (
-    <div className='container'>
-      <main className='main'>
-        <h1 className='title'>{data.properties.Name.title[0].plain_text}</h1>
-        Username: {data.properties.Username.rich_text[0].plain_text}
-        <br />
-        Number of projects: {data.properties.Projects.relation.length}
-        <br />
+    <div className={styles.container}>
+      <main className={styles.main}>
+        <div className={styles.left}>
+          <img
+            src={data.properties.Image.files[0].file.url}
+            alt="Profile image"
+          ></img>
+          <h3>{data.properties.Name.title[0].plain_text}</h3>
+        </div>
+
+        <div className={styles.right}>
+          <p>
+            <b>Username: </b>
+            {data.properties.Username.rich_text[0].plain_text}
+          </p>
+          <p>
+            <b>Number of projects: </b>
+            {data.properties.Projects.relation.length}
+          </p>
+        </div>
       </main>
     </div>
   );
 };
 
-function draw() {}
+// function draw() {}
 
 export default UserPage;
