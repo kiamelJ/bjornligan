@@ -36,6 +36,12 @@ const ReportCreate = () => {
     newdata.startDate = new Intl.DateTimeFormat('sv-SV').format(data.startDate);
     newdata.endDate = new Intl.DateTimeFormat('sv-SV').format(data.endDate);
 
+    if(!checked)
+    {
+      newdata.endDate = null;
+    }
+    
+
     await fetch("../api/timereport/reportsummary", {
       method: "POST",
       headers: {
