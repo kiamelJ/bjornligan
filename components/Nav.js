@@ -42,7 +42,9 @@ const Nav = () => {
           {getCookie("Name")}
         </li>
         <li>
+          <a className='inActive'>
           <Link href="/">Log out</Link>
+          </a>     
         </li>
       </ul>
     </nav>

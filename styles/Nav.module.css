@@ -38,12 +38,7 @@
   font-style: italic;
   color: rgb(53, 53, 53);
   padding: 0px 0px 0px 50px;
-  /* PADDING MESSES WITH MOBILE NAVBAR :( */
 }
-
-/* .rightMargin {
-          margin-right: auto;
-} */
 
 @media (max-width: 900px) {
   .nav ul {
@@ -55,6 +50,6 @@
   .userName {
     font-style: italic;
     color: rgb(53, 53, 53);
-    padding: 0px 0px 0px 0px;
+    padding: 20px 0px 0px 0px;
   }
 }
