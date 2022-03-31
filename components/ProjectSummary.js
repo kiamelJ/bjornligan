@@ -58,6 +58,8 @@ const ProjectSummary = ({ project }) => {
   } else if (isLoading == false && result == null) {
     return (
       <div className={style.main}>
+      <h1 className="title">Project Summary</h1>
+      <p className="description"></p>
         <div className={style.flexbox}>
           <form className={style.projectbox} onSubmit={handleSubmit}>
             <label htmlFor='project'></label>
@@ -109,6 +111,8 @@ const ProjectSummary = ({ project }) => {
       "Timereports for " + newData.startDate + " - " + newData.endDate;
     return (
       <div className={style.main}>
+      <h1 className="title">Project Summary</h1>
+      <p className="description"></p>
         <div className={style.flexbox}>
           <form className={style.projectbox} onSubmit={handleSubmit}>
             <div htmlFor='project'></div>
