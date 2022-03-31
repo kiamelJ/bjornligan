@@ -66,6 +66,8 @@ const ReportCreate = () => {
     if (!reports) {
       return (
         <div className={style.main}>
+        <h1 className="title">Report Summary</h1>
+        <p className="description"></p>
           <div className={style.flexbox}>
             <form className={style.projectbox}>
               <label>
@@ -110,6 +112,8 @@ const ReportCreate = () => {
         : "Timereports for " + newdata.startDate + " - " + newdata.endDate;
       return (
         <div className={style.main}>
+        <h1 className="title">Report Summary</h1>
+        <p className="description"></p>
           <div className={style.flexbox}>
             <form className={style.projectbox}>
               <label>
@@ -166,6 +170,8 @@ const ReportCreate = () => {
     if (!reports) {
       return (
         <div className={style.main}>
+        <h1 className="title">Report Summary</h1>
+        <p className="description"></p>
           <div className={style.flexbox}>
             <form className={style.projectbox}>
               <label>
@@ -200,6 +206,8 @@ const ReportCreate = () => {
         : "Timereports for " + newdata.startDate + " - " + newdata.endDate;
       return (
         <div className={style.main}>
+        <h1 className="title">Report Summary</h1>
+        <p className="description"></p>
           <div className={style.flexbox}>
             <form className={style.projectbox}>
               <label>
