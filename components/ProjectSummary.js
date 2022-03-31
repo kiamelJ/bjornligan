@@ -160,6 +160,8 @@ const ProjectSummary = ({ project }) => {
       </div>
     );
   }
+  else
+    return <></>
 };
 
 export default ProjectSummary;
