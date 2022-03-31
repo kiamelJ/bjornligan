@@ -100,7 +100,7 @@ const ReportCreate = () => {
                   locale='en-GB'
                 />
               </div>
-              <button onClick={submitReport}>Submit</button>
+              <button onClick={submitReport}>Search</button>
             </form>
           </div>
         </div>
@@ -146,7 +146,7 @@ const ReportCreate = () => {
                   locale='en-GB'
                 />
               </div>
-              <button onClick={submitReport}>Submit</button>
+              <button onClick={submitReport}>Search</button>
             </form>
             <p className='description'>{message}</p>
             <div className='grid'>
@@ -194,7 +194,7 @@ const ReportCreate = () => {
                   locale='en-GB'
                 />
               </div>
-              <button onClick={submitReport}>Submit</button>
+              <button onClick={submitReport}>Search</button>
             </form>
           </div>
         </div>
@@ -230,7 +230,7 @@ const ReportCreate = () => {
                   locale='en-GB'
                 />
               </div>
-              <button onClick={submitReport}>Submit</button>
+              <button onClick={submitReport}>Search</button>
             </form>
             <p className='description'>{message}</p>
             <div className='grid'>
@@ -249,6 +249,8 @@ const ReportCreate = () => {
       );
     }
   }
+  else
+    return <></>
 };
 
 export default ReportCreate;
