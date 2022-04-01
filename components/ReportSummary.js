@@ -78,8 +78,8 @@ const ReportCreate = () => {
                   onChange={handleChange}
                 ></input>
               </label>
-              <br />
-              <br />
+              <br/>
+              <br/>
               <label htmlFor='startDate'>Start Date</label>
               <div>
                 <DatePicker
@@ -124,8 +124,8 @@ const ReportCreate = () => {
                   onChange={handleChange}
                 ></input>
               </label>
-              <br />
-              <br />
+              <br/>
+              <br/>
               <label htmlFor='startDate'>Start Date</label>
               <div>
                 <DatePicker
@@ -182,8 +182,8 @@ const ReportCreate = () => {
                   onChange={handleChange}
                 ></input>
               </label>
-              <br />
-              <br />
+              <br/>
+              <br/>
               <label htmlFor='startDate'>Date</label>
               <div>
                 <DatePicker
@@ -218,8 +218,8 @@ const ReportCreate = () => {
                   onChange={handleChange}
                 ></input>
               </label>
-              <br />
-              <br />
+              <br/>
+              <br/>
               <div htmlFor='startDate'>Date</div>
               <div>
                 <DatePicker

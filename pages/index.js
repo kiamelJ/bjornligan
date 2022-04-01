@@ -1,7 +1,7 @@
 import LoginComponent from "../components/Login";
 import Meta from "../components/Meta";
 
-const ProjectList = () => {
+const Login = () => {
   return  (
     <>
     <Meta title='Login' keywords='user, login' description='User login page' />
@@ -10,7 +10,7 @@ const ProjectList = () => {
   );
 };
 
-export default ProjectList;
+export default Login;
 
 
 

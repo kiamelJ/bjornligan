@@ -8,12 +8,6 @@ const databaseId = `${process.env.NOTION_DATABASE_ID_PROJECTS}`;
 export default async function handler(request, res) {
   const response = await notion.databases.query({
     database_id: databaseId,
-    // filter: {
-    //   property: "Status",
-    //   select: {
-    //     equals: "Active",
-    //   },
-    // },
   });
 
   res.status(200).json(response);

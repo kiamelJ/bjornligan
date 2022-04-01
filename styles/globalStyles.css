@@ -135,7 +135,6 @@ a {
 .active {
   box-shadow: inset -3px -3px 7px #ffffff73,
     inset 3px 3px 5px rgba(94, 104, 121, 0.288);
-  /* color: rgb(105, 187, 47); */
 }
 
 .inActive {

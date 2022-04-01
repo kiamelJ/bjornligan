@@ -48,9 +48,6 @@ function Login() {
               name="username"
               type="text"
               placeholder="Enter username..."
-              //TODO: Fixa regex
-              // pattern='([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))'
-              // title='(YYYY-MM-DD)'
               value={data.username}
               onChange={(e) =>
                 setData({ ...data, [e.target.name]: e.target.value })

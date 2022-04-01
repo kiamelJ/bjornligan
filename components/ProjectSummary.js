@@ -6,10 +6,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import style from "./../styles/Summary.module.css";
 import Loader from "./Loader";
 
-//TODO Välja projekt så vi får projektID och så vi kan skicka det till API idRequest
-//TODO ProjektID state
-//TODO Mappa ut resultat!
-
 const ProjectSummary = ({ project }) => {
   const [data, setData] = useState({
     startDate: new Date(),
@@ -82,8 +78,8 @@ const ProjectSummary = ({ project }) => {
                 </option>
               ))}
             </select>
-            <br />
-            <br />
+            <br/>
+            <br/>
             <label htmlFor='startDate'>Start Date</label>
             <DatePicker
               dateFormat='yyyy-MM-dd'
@@ -135,8 +131,8 @@ const ProjectSummary = ({ project }) => {
                 </option>
               ))}
             </select>
-            <br />
-            <br />
+            <br/>
+            <br/>
             <div htmlFor='startDate'>Start Date</div>
             <DatePicker
               dateFormat='yyyy-MM-dd'

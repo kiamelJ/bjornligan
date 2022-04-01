@@ -31,7 +31,7 @@ const Nav = () => {
               </a>
             </Link>
         </li>
-        <li className={navStyles.rightMargin}>
+        <li>
           <Link href="/userpage">
             <a className={currentRoute === "/userpage" ? "active" : "inActive"}>
               Profile

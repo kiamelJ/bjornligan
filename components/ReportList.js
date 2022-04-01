@@ -10,7 +10,6 @@ const ReportList = ({ report }) => {
           {report.response.results.map((data) => (
             <li key={data.id} id={data.id} className='card'>
               <h2>{data.properties.Note.title[0].plain_text}</h2>
-              {}
             </li>
           ))}
         </div>
