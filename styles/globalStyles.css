@@ -141,7 +141,6 @@ a {
   box-shadow: -3px -3px 7px #ffffff73, 3px 3px 15px rgba(94, 104, 121, 0.288);
 }
 
-/* Mobile friendly layout */
 @media (max-width: 100%) {
   .grid {
     width: 100%;
